@@ -1,0 +1,9 @@
+﻿<UserControl x:Class="DS4Tool.MainWindowView_Controllers"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:DS4Tool"
+             xmlns:lang="clr-namespace:TranslationLibrary;assembly=TranslationLibrary">
+    <ScrollViewer>
+        <ItemsControl ItemsSource="{Binding Controllers}" Margin="40,0"/>
+    </ScrollViewer>
+</UserControl>

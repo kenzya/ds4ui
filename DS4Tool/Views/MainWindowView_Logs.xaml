@@ -1,0 +1,13 @@
+﻿<UserControl x:Class="DS4Tool.MainWindowView_Logs"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:DS4Tool">
+    <ListView Margin="40,0" ItemsSource="{Binding MessageList}" BorderThickness="0">
+        <ListView.View>
+            <GridView ColumnHeaderContainerStyle="{StaticResource CollapsedHeader}">
+                <GridViewColumn DisplayMemberBinding="{Binding Message}" />
+                <GridViewColumn DisplayMemberBinding="{Binding TimeGenerated}" />
+            </GridView>
+        </ListView.View>
+    </ListView>
+</UserControl>

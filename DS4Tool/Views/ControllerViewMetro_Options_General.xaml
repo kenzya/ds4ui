@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="DS4Tool.ControllerViewMetro_Options_General"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lang="clr-namespace:TranslationLibrary;assembly=TranslationLibrary">
+    <Grid Margin="40,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="{lang:Translate label_option_controller_icon}" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" TextWrapping="Wrap"/>
+        <CheckBox Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" VerticalAlignment="Center" IsChecked="{Binding ShowIcon}"/>
+    </Grid>
+</UserControl>

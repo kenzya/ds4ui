@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="DS4Tool.MainWindowView_Options"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:metro="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:local="clr-namespace:DS4Tool"
+             xmlns:lang="clr-namespace:TranslationLibrary;assembly=TranslationLibrary">
+    <Grid Margin="40,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="{lang:Translate label_option_window_style}" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" TextWrapping="Wrap"/>
+        <CheckBox Name="MetroStyle" Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" VerticalAlignment="Center" IsChecked="{Binding MetroStyle}"/>
+        
+        <TextBlock Text="{lang:Translate label_option_theme_color}" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
+        <ComboBox Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" VerticalAlignment="Center" ItemsSource="{Binding AccentList}" 
+                  SelectedItem="{Binding SelectedAccent}" IsEnabled="{Binding Path=IsChecked, ElementName=MetroStyle}"/>
+                  
+        <TextBlock Text="{lang:Translate label_option_theme_base}" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
+        <ComboBox Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" ItemsSource="{Binding ThemeList}" SelectedItem="{Binding SelectedTheme}"
+                  IsEnabled="{Binding Path=IsChecked, ElementName=MetroStyle}"/>
+
+        <TextBlock Text="{lang:Translate label_option_languages}" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" />
+        <ComboBox Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" VerticalAlignment="Center" ItemsSource="{Binding LanguageList}" 
+                  SelectedItem="{Binding SelectedLanguage}"/>
+
+        <TextBlock Text="{lang:Translate label_option_reset}" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" TextWrapping="Wrap"/>
+        <Button Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Content="{lang:Translate label_option_button}" Command="{Binding RestoreDefaultCommand}"/>
+    </Grid>
+</UserControl>

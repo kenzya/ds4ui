@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+	<style Default="true">true</style>
+	<language Default="english">english</language>
+	<theme Default="Dark">Dark</theme>
+	<accent Default="Steel">Steel</accent>
+</configuration>

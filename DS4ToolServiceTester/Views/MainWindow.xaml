@@ -1,0 +1,49 @@
+﻿<Window x:Class="DS4ToolTester.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"          
+        xmlns:local="clr-namespace:DS4ToolTester"
+        Title="MainWindow" Height="500" Width="600" WindowStyle="ToolWindow" ResizeMode="NoResize" Closing="Window_Closing">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <GroupBox Grid.Row="0" Header="Add Controller">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Name:" VerticalAlignment="Center"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding ControllerName}"/>
+                    
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Connection:" VerticalAlignment="Center"/>
+                    <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                        <RadioButton VerticalAlignment="Center" Content="USB      " GroupName="protocol" IsChecked="{Binding Path=ConnectionType, Converter={StaticResource converter}, ConverterParameter={x:Static local:ConnectionTypes.USB}}"/>
+                        <RadioButton VerticalAlignment="Center" Content="Bluetooth" GroupName="protocol" IsChecked="{Binding Path=ConnectionType, Converter={StaticResource converter}, ConverterParameter={x:Static local:ConnectionTypes.Bluetooth}}"/>
+                    </StackPanel>
+                    
+                    <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="Connect" Command="{Binding AddController}"/>
+                </Grid>    
+            </GroupBox>
+            <GroupBox Grid.Row="1" Header="Controllers">
+                <ListView ItemsSource="{Binding Controllers}" HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Visible"/>
+            </GroupBox>
+        </Grid>
+        <GroupBox Header="Event Log" Grid.Column="1">
+            <ListBox ItemsSource="{Binding Logs}" ScrollViewer.VerticalScrollBarVisibility="Visible"/>
+        </GroupBox>
+    </Grid>
+</Window>

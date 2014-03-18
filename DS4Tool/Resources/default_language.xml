@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<language language="english" version="0.0.3.0" author="Donbabbeo">
+	<line key="label_about_button">ABOUT</line>
+  
+	<line key="header_controllers">Controllers</line>
+	<line key="header_logs">Logs</line>
+	<line key="header_options">Options</line>
+
+	<line key="header_options_general">General</line>
+	<line key="header_options_led">Led</line>
+	<line key="header_options_rumble">Rumble</line>
+	<line key="header_options_touchpad">Touchpad</line>
+	<line key="header_options_keymap">Remap</line>
+
+	<line key="label_option_controller_icon">Show Icon</line>
+
+	<line key="label_option_window_style">Use Metro Style (require restart)</line>
+	<line key="label_option_theme_color">Color</line>
+	<line key="label_option_theme_base">Theme</line>
+	<line key="label_option_languages">Languages</line>
+	<line key="label_option_reset">Restore default</line>
+	<line key="label_option_button">Restore Default</line>
+</language>

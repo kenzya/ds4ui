@@ -1,0 +1,37 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:DS4Tool">
+    <DataTemplate DataType="{x:Type local:ControllerViewModel}">
+        <local:ControllerViewMetro />
+    </DataTemplate>
+
+    <Style x:Key="CollapsedHeader" TargetType="{x:Type GridViewColumnHeader}">
+        <Setter Property="Visibility" Value="Collapsed" />
+    </Style>
+
+    <BooleanToVisibilityConverter x:Key="converter"/>
+
+    <BitmapImage x:Key="DS4Image"/>
+    <BitmapImage x:Key="USBImage"/>
+    <BitmapImage x:Key="BTImage"/>
+    <BitmapImage x:Key="DS4ImageWhite" UriSource="/DS4Tool;component/Images/DS4White.png" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
+    <BitmapImage x:Key="DS4ImageBlack" UriSource="/DS4Tool;component/Images/DS4Black.png" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
+    <BitmapImage x:Key="USBImageWhite" UriSource="/DS4Tool;component/Images/USBWhite.png" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
+    <BitmapImage x:Key="USBImageBlack" UriSource="/DS4Tool;component/Images/USBBlack.png" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
+    <BitmapImage x:Key="BTImageWhite" UriSource="/DS4Tool;component/Images/BTWhite.png" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
+    <BitmapImage x:Key="BTImageBlack" UriSource="/DS4Tool;component/Images/BTBlack.png" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
+
+    <Image x:Key="Batt0" Source="/DS4Tool;component/Images/0.png" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
+    <Image x:Key="Batt1" Source="/DS4Tool;component/Images/10.png" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
+    <Image x:Key="Batt2" Source="/DS4Tool;component/Images/20.png" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
+    <Image x:Key="Batt3" Source="/DS4Tool;component/Images/30.png" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
+    <Image x:Key="Batt4" Source="/DS4Tool;component/Images/40.png" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
+    <Image x:Key="Batt5" Source="/DS4Tool;component/Images/50.png" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
+    <Image x:Key="Batt6" Source="/DS4Tool;component/Images/60.png" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
+    <Image x:Key="Batt7" Source="/DS4Tool;component/Images/70.png" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
+    <Image x:Key="Batt8" Source="/DS4Tool;component/Images/80.png" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
+    <Image x:Key="Batt9" Source="/DS4Tool;component/Images/90.png" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
+    <Image x:Key="Batt10" Source="/DS4Tool;component/Images/100.png" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
+    <BitmapImage x:Key="Batt10+" UriSource="/DS4Tool;component/Images/Charged.png" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
+
+</ResourceDictionary>

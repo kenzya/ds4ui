@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="DS4Tool.ControllerViewMetro"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:metro="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:local="clr-namespace:DS4Tool"
+             xmlns:control="clr-namespace:ControlsLibrary;assembly=ControlsLibrary"
+             xmlns:lang="clr-namespace:TranslationLibrary;assembly=TranslationLibrary">
+    <control:CustomExpander>
+        <control:CustomExpander.Header>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="6*"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="{DynamicResource DS4Image}" VerticalAlignment="Center" Height="50" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"/>
+                <DockPanel Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Bottom" LastChildFill="False">
+                    <Image Source="{DynamicResource BTImage}" VerticalAlignment="Center" HorizontalAlignment="Left" Height="22" Margin="0,2" 
+                           DockPanel.Dock="Bottom" Visibility="{Binding IsBluetoothConnected, Converter={StaticResource converter}}"/>
+                    <Image Source="{DynamicResource USBImage}" VerticalAlignment="Center" HorizontalAlignment="Left" Height="22" Margin="0,2" 
+                           DockPanel.Dock="Bottom" Visibility="{Binding IsUsbConnected, Converter={StaticResource converter}}"/>
+                </DockPanel>
+                <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding Name}" FontSize="30" Margin="10,0" VerticalAlignment="Center" Foreground="{DynamicResource BlackBrush}"/>
+                <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding Status}" Margin="10,0" VerticalAlignment="Center" Foreground="{DynamicResource HighlightBrush}"/>
+            </Grid>
+        </control:CustomExpander.Header>
+        <control:CustomExpander.Container>
+            <metro:MetroAnimatedSingleRowTabControl TabStripPlacement="Left">
+                <metro:MetroTabItem Header="{lang:Translate header_options_general}">
+                    <local:ControllerViewMetro_Options_General/>
+                </metro:MetroTabItem>
+                <metro:MetroTabItem Header="{lang:Translate header_options_led}">
+                    <TextBlock Text="Text"/>
+                </metro:MetroTabItem>
+                <metro:MetroTabItem Header="{lang:Translate header_options_rumble}">
+                    <TextBlock Text="Text"/>
+                </metro:MetroTabItem>
+                <metro:MetroTabItem Header="{lang:Translate header_options_touchpad}">
+                    <TextBlock Text="Text"/>
+                </metro:MetroTabItem>
+                <metro:MetroTabItem Header="{lang:Translate header_options_keymap}">
+                    <TextBlock Text="Text"/>
+                </metro:MetroTabItem>
+            </metro:MetroAnimatedSingleRowTabControl>
+        </control:CustomExpander.Container>
+    </control:CustomExpander>
+</UserControl>
