@@ -5,11 +5,12 @@ using System.Windows.Input;
 namespace ControlsLibrary
 {
     /// <summary>
-    /// Logica di interazione per CustomExpander.xaml
+    /// CustomControl used to replace the standard expander
     /// </summary>
     public partial class CustomExpander : UserControl
     {
-        // dependency properties
+        #region Dependency Properties
+
         public FrameworkElement Header
         {
             get
@@ -38,12 +39,19 @@ namespace ControlsLibrary
         public static readonly DependencyProperty ContainerProperty = DependencyProperty.Register("Container", typeof(FrameworkElement), typeof(CustomExpander),
             new UIPropertyMetadata(null, OnControlChanged));
 
+        #endregion // Dependency Properties
+
+        #region ctor
+
         public CustomExpander()
         {
             InitializeComponent();
         }
 
-        // property change handlers
+        #endregion // ctor
+
+        #region PropertyChange Handlers
+
         private static void OnControlChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
         {
             CustomExpander c = dependencyObject as CustomExpander;
@@ -67,11 +75,17 @@ namespace ControlsLibrary
             }
         }
 
+        #endregion // PropertyChange Handlers
+
+        #region methods
+
         private void ConstructExpander()
         {
             Header.MouseLeftButtonUp += new MouseButtonEventHandler(HeaderMouseClick);
             header.Content = Header;
             container.Content = Container;
         }
+
+        #endregion // methods
     }
 }

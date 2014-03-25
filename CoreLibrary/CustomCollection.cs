@@ -13,8 +13,10 @@ namespace CoreLibrary
     /// </summary>    
     public class CustomCollection<T> : ObservableCollection<T>
     {
+        #region properties
+
         /// <summary>
-        /// variabile che blocca o sblocca l'invio di notifiche dell'aggiornamento
+        /// Suspend/resume notification changes
         /// </summary>
         private bool suspendCollectionChangeNotification;
         public void ResumeCollectionChangeNotification()
@@ -26,20 +28,23 @@ namespace CoreLibrary
             this.suspendCollectionChangeNotification = true;
         }
 
-        /// <summary>
-        /// Costruttore della classe
-        /// </summary>
+        #endregion // properties
+
+        #region ctor
+
         public CustomCollection()
             : base()
         {
             this.suspendCollectionChangeNotification = false;
         }
 
+        #endregion // ctor
+
+        #region methods
+
         /// <summary>
-        /// Sostituisce un elemento della collection
+        /// Replace an item of the collection
         /// </summary>
-        /// <param name="index">indice della sostituzione</param>
-        /// <param name="value">valore da sostituire</param>
         public void Replace(int index, T value)
         {
             this.SuspendCollectionChangeNotification();
@@ -58,9 +63,8 @@ namespace CoreLibrary
         }
 
         /// <summary>
-        /// Aggiunge una lista di elementi alla collection
+        /// Add a list of items to the collection
         /// </summary>
-        /// <param name="items">lista da aggiungere</param>
         public void AddItems(IList items)
         {
             this.SuspendCollectionChangeNotification();
@@ -82,9 +86,8 @@ namespace CoreLibrary
         }
 
         /// <summary>
-        /// Rimuove una lista di elementi dalla collection
-        /// </summary>
-        /// <param name="items">lista da rimuovere</param>
+        /// Remove a list from the collection
+        /// </summary>        
         public void RemoveItems(IList items)
         {
             this.SuspendCollectionChangeNotification();
@@ -105,8 +108,12 @@ namespace CoreLibrary
             }
         }
 
+        #endregion // methods
+
+        #region events
+
         /// <summary>
-        /// Evento di notifica di un cambio della collection
+        /// Notification Event
         /// </summary>
         public void NotifyChanges()
         {
@@ -145,5 +152,7 @@ namespace CoreLibrary
                 }
             }
         }
+
+        #endregion // events
     }
 }
