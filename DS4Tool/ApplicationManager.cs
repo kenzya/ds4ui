@@ -1,16 +1,16 @@
-﻿using CommunicationLibrary;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.ServiceModel;
+using System.Windows;
+using CommunicationLibrary;
 using ConfigurationLibrary;
 using ControllerConfigurationLibrary;
 using EventLogLibrary;
 using MahApps.Metro;
 using MessengerLibrary;
 using NotifyIconLibrary;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.ServiceModel;
-using System.Windows;
 using TranslationLibrary;
 using UserLibrary;
 

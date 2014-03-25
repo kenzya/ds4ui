@@ -92,7 +92,7 @@ namespace DS4Tool
 
         private void AddLogMessage(EventLogEntry message)
         {
-            MessageList.Add(message);
+            MessageList.Insert(0, message);
         }
 
         #endregion // Log Tab

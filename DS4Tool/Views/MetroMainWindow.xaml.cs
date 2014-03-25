@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace DS4Tool
 {
@@ -16,6 +17,11 @@ namespace DS4Tool
         private void About_Click(object sender, RoutedEventArgs e)
         {
             about.IsOpen = true;
+        }
+
+        private void User_Click(object sender, RoutedEventArgs e)
+        {
+            DialogManager.ShowMessageAsync(this, "TEST", "Message test whatever");
         }
     }
 }

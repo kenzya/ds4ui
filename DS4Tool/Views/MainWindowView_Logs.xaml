@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:DS4Tool">
     <ListView Margin="40,0" ItemsSource="{Binding MessageList}" BorderThickness="0">
         <ListView.View>
-            <GridView ColumnHeaderContainerStyle="{StaticResource CollapsedHeader}">
+            <GridView ColumnHeaderContainerStyle="{StaticResource CollapsedHeader}" >
                 <GridViewColumn DisplayMemberBinding="{Binding Message}" />
                 <GridViewColumn DisplayMemberBinding="{Binding TimeGenerated}" />
             </GridView>

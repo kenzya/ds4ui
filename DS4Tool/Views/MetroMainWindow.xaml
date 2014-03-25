@@ -9,7 +9,7 @@
         <metro:WindowCommands>
             <Button Content="{lang:Translate label_about_button}" Click="About_Click"/>
 
-            <Button Command="{Binding ChangeUserCommand}">
+            <Button>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="{Binding UserName}" Margin="0,0,10,0" VerticalAlignment="Center"/>
                     <Image Source="{Binding UserImage}" Width="25" Height="25"/>

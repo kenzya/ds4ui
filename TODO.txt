@@ -1,5 +1,3 @@
 ﻿TODO
 - switch to enums if suitable
-- loglist sort ascending
-- styled MessageBox
 - implement IoC container
