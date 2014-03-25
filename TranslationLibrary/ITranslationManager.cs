@@ -2,6 +2,9 @@
 
 namespace TranslationLibrary
 {
+    /// <summary>
+    /// Interface of TranslationManager
+    /// </summary>
     public interface ITranslationManager
     {
         void Initialize(string path);

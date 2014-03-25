@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Windows.Media.Imaging;
 
 namespace NotifyIconLibrary
 {
+    /// <summary>
+    /// This class is used to interact with the trayIcon of every controller connected
+    /// </summary>
     public class NotifyIconManager : INotifyIconManager
     {
         #region fields
@@ -17,8 +19,7 @@ namespace NotifyIconLibrary
         #region constructor
 
         public NotifyIconManager()
-        {
-            //icon = new NotifyIcon();
+        {            
             dictionary = new Dictionary<int, NotifyIcon>();
         }
         
@@ -26,18 +27,29 @@ namespace NotifyIconLibrary
 
         #region methods
 
+        /// <summary>
+        /// Show the icon of a controller
+        /// </summary>
         public void ShowIcon(int id)
         {
             if (!dictionary.ContainsKey(id))
                 dictionary.Add(id, new NotifyIcon());
             dictionary[id].Visible = true;            
         }
+
+        /// <summary>
+        /// Hide the icon of a controller
+        /// </summary>
         public void HideIcon(int id)
         {
             if (!dictionary.ContainsKey(id))
                 dictionary.Add(id, new NotifyIcon());
             dictionary[id].Visible = false;            
         }
+
+        /// <summary>
+        /// Set the icon of a controller based on the battery value
+        /// </summary>
         public void SetIcon(int id, bool isUsb, int value, bool isVisible)
         {
             if (!dictionary.ContainsKey(id))
@@ -51,14 +63,11 @@ namespace NotifyIconLibrary
             }
             else if (isUsb)
             {
-                // ANIMAZIONE DA FARE!!!
+                // TO DO: do animation from value to 100
                 dictionary[id].Icon = Icon.FromHandle(((Bitmap)Image.FromFile(Environment.CurrentDirectory + @"\Icons\Charged.png")).GetHicon());
-                //dictionary[id].Icon = Icon.FromHandle(((Bitmap)System.Windows.Application.Current.FindResource("Batt10+")).GetHicon());
             }
             else if (value > 0 && value <= 10)
             {
-                //dictionary[id].Icon = new Icon(System.Windows.Application.GetResourceStream(new Uri("/Images/batt0.ico", UriKind.Relative)).Stream);
-                //dictionary[id].Icon = (Icon)System.Windows.Application.Current.FindResource("Batt1");
                 dictionary[id].Icon = Icon.FromHandle(((Bitmap)Image.FromFile(Environment.CurrentDirectory + @"\Icons\10.png")).GetHicon());
             }
             else if (value > 10 && value <= 20)

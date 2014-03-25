@@ -3,6 +3,9 @@ using System.Diagnostics;
 
 namespace EventLogLibrary
 {
+    /// <summary>
+    /// Interface of the EventLogManager
+    /// </summary>
     public interface IEventLogManager
     {
         void Initialize(string source);

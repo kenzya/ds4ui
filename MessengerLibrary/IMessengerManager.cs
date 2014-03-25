@@ -2,6 +2,9 @@
 
 namespace MessengerLibrary
 {
+    /// <summary>
+    /// Interface of MessengerManager
+    /// </summary>
     public interface IMessengerManager
     {
         void Register(string message, Action callback);

@@ -1,6 +1,8 @@
-﻿
-namespace NotifyIconLibrary
+﻿namespace NotifyIconLibrary
 {
+    /// <summary>
+    /// Interface of the NotifyIconManager
+    /// </summary>
     public interface INotifyIconManager
     {
         void ShowIcon(int id);
