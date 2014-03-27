@@ -1,4 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <configuration>
-	<showicon Default="true">true</showicon>
+	<showicon Default="false">false</showicon>
 </configuration>

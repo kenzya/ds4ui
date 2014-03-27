@@ -8,6 +8,7 @@ using ControllerConfigurationLibrary;
 using EventLogLibrary;
 using MessengerLibrary;
 using NotifyIconLibrary;
+using ThemeLibrary;
 using TranslationLibrary;
 using UserLibrary;
 
@@ -43,8 +44,9 @@ namespace DS4Tool
             IUserManager user = new UserManager();
             INotifyIconManager notifyIcon = new NotifyIconManager();
             IEventLogManager logger = new EventLogManager();
+            IThemeManager theme = new ThemeManager();
 
-            appManager = new ApplicationManager(messenger, translation, configuration, user, notifyIcon, logger, controller);
+            appManager = new ApplicationManager(messenger, translation, configuration, user, notifyIcon, logger, controller, theme);
             appManager.Start();
         }
         private void Application_Exit(object sender, ExitEventArgs e)

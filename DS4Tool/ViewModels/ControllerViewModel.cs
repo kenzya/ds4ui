@@ -1,10 +1,19 @@
 ﻿using CommunicationLibrary;
+using ControllerConfigurationLibrary;
 using CoreLibrary;
+using NotifyIconLibrary;
 
 namespace DS4Tool
 {
     public class ControllerViewModel : ViewModelBase
     {
+        #region dependency
+
+        INotifyIconManager IconManager;
+        IControllerConfigurationManager ControllerConfigurationManager;
+
+        #endregion
+
         #region Status
 
         private int id;
@@ -120,7 +129,7 @@ namespace DS4Tool
             else
                 Status = "Battery " + BatteryValue + "%";
 
-            App.AppManager.SetControllerIcon(ControllerContract.Create(this.Id, this.Name, this.IsUsbConnected, this.IsBluetoothConnected, this.BatteryValue, ControllerMessage.NONE, ShowIcon ?? false));
+            IconManager.SetIcon(Id, IsUsbConnected, BatteryValue, ShowIcon ?? false);
         }
 
         #endregion // Status
@@ -133,7 +142,7 @@ namespace DS4Tool
             get
             {
                 if (showIcon == null)
-                    showIcon = App.AppManager.GetControllerIcon(false, this.Name);
+                    showIcon = bool.Parse(ControllerConfigurationManager.GetData(ControllerOptions.SHOW_ICON, Name));
                 return showIcon;
             }
             set
@@ -142,7 +151,9 @@ namespace DS4Tool
                 {
                     showIcon = value;
                     NotifyPropertyChanged(() => ShowIcon);
-                    App.AppManager.SetControllerIcon(ControllerContract.Create(this.Id, this.Name, this.IsUsbConnected, this.IsBluetoothConnected, this.BatteryValue, ControllerMessage.NONE, value ?? false));
+
+                    ControllerConfigurationManager.SetData(ControllerOptions.SHOW_ICON, Name, (value ?? false).ToString());
+                    IconManager.SetIcon(Id, IsUsbConnected, BatteryValue, value ?? false);
                 }
             }
         }
@@ -151,14 +162,14 @@ namespace DS4Tool
 
         #region Ctor
 
-        public ControllerViewModel(ControllerContract controller)
+        public ControllerViewModel(INotifyIconManager iconManager, IControllerConfigurationManager controllerConfigurationManager, ControllerContract controller)
         {
+            IconManager = iconManager;
+            ControllerConfigurationManager = controllerConfigurationManager;
+
             Id = controller.Id;
             Name = controller.Name;
-            IsUsbConnected = controller.IsUsbConnected;
-            IsBluetoothConnected = controller.IsBluetoothConnected;
-            BatteryValue = controller.BatteryValue;
-
+            
             ChangeStatus(controller);
         }
 

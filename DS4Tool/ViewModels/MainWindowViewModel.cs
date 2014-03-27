@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows.Input;
 using CommunicationLibrary;
 using ConfigurationLibrary;
+using ControllerConfigurationLibrary;
 using CoreLibrary;
-using MahApps.Metro;
+using NotifyIconLibrary;
+using ThemeLibrary;
 using TranslationLibrary;
 using UserLibrary;
 
@@ -24,6 +25,9 @@ namespace DS4Tool
         private readonly IUserManager UserManager;
         private readonly IConfigurationManager ConfigurationManager;
         private readonly ITranslationManager TranslationManager;
+        private readonly INotifyIconManager IconManager;
+        private readonly IControllerConfigurationManager ControllerConfigurationManager;
+        private readonly IThemeManager ThemeManager;
 
         #endregion 
 
@@ -82,7 +86,7 @@ namespace DS4Tool
             }
             else
             {
-                Controllers.Add(new ControllerViewModel(controller));
+                Controllers.Add(new ControllerViewModel(IconManager, ControllerConfigurationManager, controller));
             }
         }
 
@@ -140,7 +144,7 @@ namespace DS4Tool
             {
                 if (accentList == null)
                 {
-                    accentList = ThemeManager.DefaultAccents.Select(x => x.Name).ToList();
+                    accentList = ThemeManager.GetAccentList();
                 }
                 return accentList;
             }
@@ -152,7 +156,7 @@ namespace DS4Tool
             get
             {
                 if (selectedAccent == null)
-                    return ThemeManager.DefaultAccents.Single(x => x.Name == ConfigurationManager.GetData(ConfOptions.OPTION_ACCENT)).Name;
+                    return ConfigurationManager.GetData(ConfOptions.OPTION_ACCENT);
                 return selectedAccent;
             }
             set
@@ -163,9 +167,7 @@ namespace DS4Tool
                     NotifyPropertyChanged(() => SelectedAccent);
                     
                     ConfigurationManager.SetData(ConfOptions.OPTION_ACCENT, value);
-                    Accent a = ThemeManager.DefaultAccents.Single(x => x.Name == value);
-                    Theme theme = (Theme)Enum.Parse(typeof(Theme), ConfigurationManager.GetData(ConfOptions.OPTION_THEME));
-                    ThemeManager.ChangeTheme(App.Current, a, theme);
+                    ThemeManager.SetTheme(App.Current, value, SelectedTheme);
                 }
             }
         }
@@ -177,7 +179,7 @@ namespace DS4Tool
             {
                 if (themeList == null)
                 {
-                    themeList = Enum.GetNames(typeof(Theme)).ToList();
+                    themeList = ThemeManager.GetThemeList();
                 }
                 return themeList;
             }
@@ -189,7 +191,7 @@ namespace DS4Tool
             get
             {
                 if (selectedTheme == null)
-                    return ((Theme)Enum.Parse(typeof(Theme), ConfigurationManager.GetData(ConfOptions.OPTION_THEME))).ToString();
+                    return ConfigurationManager.GetData(ConfOptions.OPTION_THEME);
                 return selectedTheme;
             }
             set
@@ -200,9 +202,7 @@ namespace DS4Tool
                     NotifyPropertyChanged(() => SelectedTheme);
 
                     ConfigurationManager.SetData(ConfOptions.OPTION_THEME, value);
-                    Theme t = (Theme)Enum.Parse(typeof(Theme), value);
-                    Accent accent = ThemeManager.DefaultAccents.Single(x => x.Name == ConfigurationManager.GetData(ConfOptions.OPTION_ACCENT));
-                    ThemeManager.ChangeTheme(App.Current, accent, t);
+                    ThemeManager.SetTheme(App.Current, SelectedAccent, value);
                 }
             }
         }
@@ -256,8 +256,8 @@ namespace DS4Tool
         }
         private void ExecuteRestore()
         {
-            SelectedAccent = ThemeManager.DefaultAccents.Single(x => x.Name == ConfigurationManager.GetDefault(ConfOptions.OPTION_ACCENT)).Name;
-            SelectedTheme = ((Theme)Enum.Parse(typeof(Theme), ConfigurationManager.GetDefault(ConfOptions.OPTION_THEME))).ToString();
+            SelectedAccent = ConfigurationManager.GetDefault(ConfOptions.OPTION_ACCENT);
+            SelectedTheme = ConfigurationManager.GetDefault(ConfOptions.OPTION_THEME);
             SelectedLanguage = ConfigurationManager.GetDefault(ConfOptions.OPTION_LANGUAGE);
             MetroStyle = bool.Parse(ConfigurationManager.GetDefault(ConfOptions.OPTION_STYLE));
         }
@@ -266,11 +266,15 @@ namespace DS4Tool
 
         #region Ctor
 
-        public MainWindowViewModel(IUserManager userManager, IConfigurationManager configurationManager, ITranslationManager translationManager)
+        public MainWindowViewModel(IUserManager userManager, IConfigurationManager configurationManager, ITranslationManager translationManager, 
+                                   INotifyIconManager iconManager, IControllerConfigurationManager controllerConfigurationManager, IThemeManager themeManager)
         {
             UserManager = userManager;
             ConfigurationManager = configurationManager;
             TranslationManager = translationManager;
+            IconManager = iconManager;
+            ControllerConfigurationManager = controllerConfigurationManager;
+            ThemeManager = themeManager;
 
             App.AppManager.RegisterControllerChange(param => ControllerChangeStatus(param));
             App.AppManager.RegisterNewLogMessage(param => AddLogMessage(param));

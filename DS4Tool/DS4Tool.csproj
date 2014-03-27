@@ -241,6 +241,10 @@
       <Project>{08adf089-b076-4fb7-bf78-7035be0a4eb1}</Project>
       <Name>NotifyIconLibrary</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ThemeLibrary\ThemeLibrary.csproj">
+      <Project>{bad3c79e-a22f-489d-87e0-d177132305f4}</Project>
+      <Name>ThemeLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TranslationLibrary\TranslationLibrary.csproj">
       <Project>{b392cf75-1179-414a-b485-57a70227e095}</Project>
       <Name>TranslationLibrary</Name>

@@ -1,22 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.ServiceModel;
-using System.Windows;
 using CommunicationLibrary;
 using ConfigurationLibrary;
 using ControllerConfigurationLibrary;
 using EventLogLibrary;
-using MahApps.Metro;
 using MessengerLibrary;
 using NotifyIconLibrary;
+using ThemeLibrary;
 using TranslationLibrary;
 using UserLibrary;
 
 namespace DS4Tool
-{
-    // TODO: keep theme change here??? (along with image color?)
+{    
     public class ApplicationManager
     {
         private readonly IMessengerManager Messenger;
@@ -27,9 +23,10 @@ namespace DS4Tool
         private readonly INotifyIconManager NotifyIcon;
         private readonly IEventLogManager Logger;
         private readonly IControllerConfigurationManager Controller;
+        private readonly IThemeManager Theme;
 
-        public ApplicationManager(IMessengerManager messenger, ITranslationManager translation, IConfigurationManager configuration, 
-                                  IUserManager user, INotifyIconManager notifyIcon, IEventLogManager logger, IControllerConfigurationManager controller)
+        public ApplicationManager(IMessengerManager messenger, ITranslationManager translation, IConfigurationManager configuration, IUserManager user, 
+                                  INotifyIconManager notifyIcon, IEventLogManager logger, IControllerConfigurationManager controller, IThemeManager theme)
         {
             Messenger = messenger;
             Translation = translation;
@@ -38,13 +35,14 @@ namespace DS4Tool
             NotifyIcon = notifyIcon;
             Logger = logger;
             Controller = controller;
+            Theme = theme;
 
             Logger.Initialize(Constants.SERVICE_NAME);
             Logger.Subscribe(param => Messenger.NotifyColleagues(AppMessages.NEW_LOG_MESSAGE, param.Entry));
 
-            Accent a = ThemeManager.DefaultAccents.Single(x => x.Name == Configuration.GetData(ConfOptions.OPTION_ACCENT));
-            Theme t = (Theme)Enum.Parse(typeof(Theme), Configuration.GetData(ConfOptions.OPTION_THEME));
-            ThemeManager.ChangeTheme(App.Current, a, t);
+            string a = Configuration.GetData(ConfOptions.OPTION_ACCENT);
+            string t = Configuration.GetData(ConfOptions.OPTION_THEME);
+            Theme.SetTheme(App.Current, a, t);
 
             Translation.ChangeLanguage(Configuration.GetData(ConfOptions.OPTION_LANGUAGE));
 
@@ -57,7 +55,7 @@ namespace DS4Tool
         public void Start()
         {
             MetroMainWindow w = new MetroMainWindow();
-            w.DataContext = new MainWindowViewModel(User, Configuration, Translation);
+            w.DataContext = new MainWindowViewModel(User, Configuration, Translation, NotifyIcon, Controller, Theme);
             w.Show();
         }
         public void Close()
@@ -65,23 +63,6 @@ namespace DS4Tool
             Logger.Unsubscribe();
             Service.Unsubscribe();
         }
-
-        public bool GetControllerIcon(bool defaultValue, string name)
-        {
-            bool result = false;
-            if (defaultValue == false)
-                bool.TryParse(Controller.GetData(ControllerOptions.SHOW_ICON, name), out result);
-            else
-                bool.TryParse(Controller.GetDefault(ControllerOptions.SHOW_ICON, name), out result);
-
-            return result;
-        }
-        public void SetControllerIcon(ControllerContract status)
-        {
-            Controller.SetData(ControllerOptions.SHOW_ICON, status.Name, status.IsIconVisible.ToString());
-            NotifyIcon.SetIcon(status.Id, status.IsUsbConnected, status.BatteryValue, status.IsIconVisible);
-        }
-
 
         public void NotifyControllerChange(ControllerContract status)
         {
