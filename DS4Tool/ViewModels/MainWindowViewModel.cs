@@ -1,10 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows.Input;
 using CommunicationLibrary;
+using ConfigurationLibrary;
 using CoreLibrary;
+using MahApps.Metro;
+using TranslationLibrary;
+using UserLibrary;
 
 namespace DS4Tool
 {
@@ -14,6 +19,14 @@ namespace DS4Tool
     /// </summary>
     public class MainWindowViewModel : ViewModelBase
     {
+        #region Dependency
+
+        private readonly IUserManager UserManager;
+        private readonly IConfigurationManager ConfigurationManager;
+        private readonly ITranslationManager TranslationManager;
+
+        #endregion 
+
         #region ToolBar Info
 
         private string userName;
@@ -22,7 +35,7 @@ namespace DS4Tool
             get
             {
                 if (string.IsNullOrEmpty(userName))
-                    userName = App.AppManager.GetUserName();
+                    userName = UserManager.GetUserName();
                 return userName;
             }
         }
@@ -33,7 +46,7 @@ namespace DS4Tool
             get 
             {
                 if (string.IsNullOrEmpty(userImage))
-                    userImage = App.AppManager.GetUserImage();
+                    userImage = UserManager.GetUserImage();
                 return userImage;
             }
         }
@@ -105,7 +118,7 @@ namespace DS4Tool
             get
             {
                 if (metroStyle == null)
-                    return App.AppManager.GetStyle(false);
+                    return bool.Parse(ConfigurationManager.GetData(ConfOptions.OPTION_STYLE));
                 return metroStyle;
             }
             set
@@ -114,7 +127,8 @@ namespace DS4Tool
                 {
                     metroStyle = value;
                     NotifyPropertyChanged(() => MetroStyle);
-                    App.AppManager.SetStyle(value ?? false);
+
+                    ConfigurationManager.SetData(ConfOptions.OPTION_STYLE, (value ?? false).ToString());
                 }
             }
         }
@@ -126,7 +140,7 @@ namespace DS4Tool
             {
                 if (accentList == null)
                 {
-                    accentList = App.AppManager.GetAccentList();
+                    accentList = ThemeManager.DefaultAccents.Select(x => x.Name).ToList();
                 }
                 return accentList;
             }
@@ -138,7 +152,7 @@ namespace DS4Tool
             get
             {
                 if (selectedAccent == null)
-                    return App.AppManager.GetAccent(false).Name;
+                    return ThemeManager.DefaultAccents.Single(x => x.Name == ConfigurationManager.GetData(ConfOptions.OPTION_ACCENT)).Name;
                 return selectedAccent;
             }
             set
@@ -147,7 +161,11 @@ namespace DS4Tool
                 {
                     selectedAccent = value;
                     NotifyPropertyChanged(() => SelectedAccent);
-                    App.AppManager.SetAccent(value);
+                    
+                    ConfigurationManager.SetData(ConfOptions.OPTION_ACCENT, value);
+                    Accent a = ThemeManager.DefaultAccents.Single(x => x.Name == value);
+                    Theme theme = (Theme)Enum.Parse(typeof(Theme), ConfigurationManager.GetData(ConfOptions.OPTION_THEME));
+                    ThemeManager.ChangeTheme(App.Current, a, theme);
                 }
             }
         }
@@ -159,7 +177,7 @@ namespace DS4Tool
             {
                 if (themeList == null)
                 {
-                    themeList = App.AppManager.GetThemeList();
+                    themeList = Enum.GetNames(typeof(Theme)).ToList();
                 }
                 return themeList;
             }
@@ -171,7 +189,7 @@ namespace DS4Tool
             get
             {
                 if (selectedTheme == null)
-                    return App.AppManager.GetTheme(false).ToString();
+                    return ((Theme)Enum.Parse(typeof(Theme), ConfigurationManager.GetData(ConfOptions.OPTION_THEME))).ToString();
                 return selectedTheme;
             }
             set
@@ -180,7 +198,11 @@ namespace DS4Tool
                 {
                     selectedTheme = value;
                     NotifyPropertyChanged(() => SelectedTheme);
-                    App.AppManager.SetTheme(value);
+
+                    ConfigurationManager.SetData(ConfOptions.OPTION_THEME, value);
+                    Theme t = (Theme)Enum.Parse(typeof(Theme), value);
+                    Accent accent = ThemeManager.DefaultAccents.Single(x => x.Name == ConfigurationManager.GetData(ConfOptions.OPTION_ACCENT));
+                    ThemeManager.ChangeTheme(App.Current, accent, t);
                 }
             }
         }
@@ -192,7 +214,7 @@ namespace DS4Tool
             {
                 if (languageList == null)
                 {
-                    languageList = App.AppManager.GetLanguagesList();
+                    languageList = TranslationManager.GetLanguagesList().ToList();
                 }
                 return languageList;
             }
@@ -204,7 +226,7 @@ namespace DS4Tool
             get
             {
                 if (selectedLanguage == null)
-                    return App.AppManager.GetLanguage(false);
+                    return ConfigurationManager.GetData(ConfOptions.OPTION_LANGUAGE);
                 return selectedLanguage;
             }
             set
@@ -213,7 +235,9 @@ namespace DS4Tool
                 {
                     selectedLanguage = value;
                     NotifyPropertyChanged(() => SelectedLanguage);
-                    App.AppManager.SetLanguage(value);
+                    
+                    ConfigurationManager.SetData(ConfOptions.OPTION_LANGUAGE, value);
+                    TranslationManager.ChangeLanguage(value);
                 }
             }
         }
@@ -232,18 +256,22 @@ namespace DS4Tool
         }
         private void ExecuteRestore()
         {
-            SelectedAccent = App.AppManager.GetAccent(true).Name;
-            SelectedTheme = App.AppManager.GetTheme(true).ToString();
-            SelectedLanguage = App.AppManager.GetLanguage(true);
-            MetroStyle = App.AppManager.GetStyle(true);
+            SelectedAccent = ThemeManager.DefaultAccents.Single(x => x.Name == ConfigurationManager.GetDefault(ConfOptions.OPTION_ACCENT)).Name;
+            SelectedTheme = ((Theme)Enum.Parse(typeof(Theme), ConfigurationManager.GetDefault(ConfOptions.OPTION_THEME))).ToString();
+            SelectedLanguage = ConfigurationManager.GetDefault(ConfOptions.OPTION_LANGUAGE);
+            MetroStyle = bool.Parse(ConfigurationManager.GetDefault(ConfOptions.OPTION_STYLE));
         }
 
         #endregion
 
         #region Ctor
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(IUserManager userManager, IConfigurationManager configurationManager, ITranslationManager translationManager)
         {
+            UserManager = userManager;
+            ConfigurationManager = configurationManager;
+            TranslationManager = translationManager;
+
             App.AppManager.RegisterControllerChange(param => ControllerChangeStatus(param));
             App.AppManager.RegisterNewLogMessage(param => AddLogMessage(param));
         }
