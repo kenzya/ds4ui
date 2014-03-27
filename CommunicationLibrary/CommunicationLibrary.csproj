@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
+    <Compile Include="ControllerMessage.cs" />
     <Compile Include="ISubscribingService.cs" />
     <Compile Include="IPublishingService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

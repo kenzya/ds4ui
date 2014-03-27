@@ -120,7 +120,7 @@ namespace DS4Tool
             else
                 Status = "Battery " + BatteryValue + "%";
 
-            App.AppManager.SetControllerIcon(ControllerContract.Create(this.Id, this.Name, this.IsUsbConnected, this.IsBluetoothConnected, this.BatteryValue, ShowIcon ?? false));
+            App.AppManager.SetControllerIcon(ControllerContract.Create(this.Id, this.Name, this.IsUsbConnected, this.IsBluetoothConnected, this.BatteryValue, ControllerMessage.NONE, ShowIcon ?? false));
         }
 
         #endregion // Status
@@ -142,7 +142,7 @@ namespace DS4Tool
                 {
                     showIcon = value;
                     NotifyPropertyChanged(() => ShowIcon);
-                    App.AppManager.SetControllerIcon(ControllerContract.Create(this.Id, this.Name, this.IsUsbConnected, this.IsBluetoothConnected, this.BatteryValue, value ?? false));
+                    App.AppManager.SetControllerIcon(ControllerContract.Create(this.Id, this.Name, this.IsUsbConnected, this.IsBluetoothConnected, this.BatteryValue, ControllerMessage.NONE, value ?? false));
                 }
             }
         }

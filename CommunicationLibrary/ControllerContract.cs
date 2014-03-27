@@ -10,6 +10,12 @@ namespace CommunicationLibrary
     public class ControllerContract
     {
         /// <summary>
+        /// Message to be sent with the data, mostly used for eventlog messages
+        /// </summary>
+        [DataMember]
+        public ControllerMessage Message { get; set;}
+
+        /// <summary>
         /// Id of the controller
         /// </summary>
         /// TODO: use this instead of Name as a key
@@ -49,10 +55,11 @@ namespace CommunicationLibrary
         /// <summary>
         /// Create a new Contract to be sent to the pipe
         /// </summary>
-        public static ControllerContract Create(int id, string name, bool isUsbConnected, bool isBluetoothConnected, int batteryValue, bool isIconVisible = false)
+        public static ControllerContract Create(int id, string name, bool isUsbConnected, bool isBluetoothConnected, int batteryValue, ControllerMessage message = ControllerMessage.NONE, bool isIconVisible = false)
         {
             return new ControllerContract
             {
+                Message = message,
                 Id = id,
                 Name = name,
                 IsUsbConnected = isUsbConnected,

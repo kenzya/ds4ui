@@ -49,6 +49,8 @@ namespace DS4ToolTester
         {
             get
             {
+                if (batteryValue == -1)
+                    batteryValue = 100;
                 return batteryValue;
             }
             set
@@ -59,7 +61,7 @@ namespace DS4ToolTester
                     NotifyPropertyChanged(() => BatteryValue);
 
                     if (batteryValue % 10 == 0)
-                        ExecuteControllerChange();
+                        ExecuteBatteryChange();
                 }
             }
         }
@@ -69,11 +71,20 @@ namespace DS4ToolTester
             this.sp = sendService;
             this.si = serviceInstaller;
 
+            this.BatteryValue = -1;
             this.ControllerId = controllerId;
             this.ControllerName = controllerName;
             this.ControllerUsbChecked = connection == ConnectionTypes.USB;
             this.ControllerBtChecked = connection == ConnectionTypes.Bluetooth;
-            this.BatteryValue = 100;
+
+            if (ControllerUsbChecked)
+            {
+                ExecuteUsbChange();
+            }
+            else
+            {
+                ExecuteBtChange();
+            }
         }
 
         private bool controllerUsbChecked;
@@ -105,7 +116,7 @@ namespace DS4ToolTester
             {
                 if (controllerUsb == null)
                 {
-                    controllerUsb = new DelegateCommand(param => ExecuteControllerChange(), param => CanExecuteControllerUsb);
+                    controllerUsb = new DelegateCommand(param => ExecuteUsbChange(), param => CanExecuteControllerUsb);
                 }
                 return controllerUsb;
             }
@@ -142,7 +153,7 @@ namespace DS4ToolTester
             {
                 if (controllerBt == null)
                 {
-                    controllerBt = new DelegateCommand(param => ExecuteControllerChange(), param => CanExecuteControllerBt);
+                    controllerBt = new DelegateCommand(param => ExecuteBtChange(), param => CanExecuteControllerBt);
                 }
                 return controllerBt;
             }
@@ -155,9 +166,33 @@ namespace DS4ToolTester
             }
         }
 
-        private void ExecuteControllerChange()
+        private void ExecuteBatteryChange()
         {
-            ControllerContract ct = ControllerContract.Create(ControllerId, ControllerName, ControllerUsbChecked, ControllerBtChecked, BatteryValue);
+            ControllerContract ct = ControllerContract.Create(ControllerId, ControllerName, ControllerUsbChecked, ControllerBtChecked, BatteryValue, ControllerMessage.CONTROLLER_BATTERY_CHANGE);
+            sp.SendCommand(ct);
+        }
+        private void ExecuteUsbChange()
+        {
+            ControllerContract ct;
+
+            if (controllerUsbChecked)
+                ct = ControllerContract.Create(ControllerId, ControllerName, ControllerUsbChecked, ControllerBtChecked, BatteryValue, ControllerMessage.CONTROLLER_CONNECT_USB);
+            else
+                ct = ControllerContract.Create(ControllerId, ControllerName, ControllerUsbChecked, ControllerBtChecked, BatteryValue, ControllerMessage.CONTROLLER_DISCONNECT_USB);
+            
+            sp.SendCommand(ct);
+
+            if (ControllerUsbChecked == false && ControllerBtChecked == false)
+                OnRequestRemove();
+        }
+        private void ExecuteBtChange()
+        {
+            ControllerContract ct;
+
+            if (controllerBtChecked)
+                ct = ControllerContract.Create(ControllerId, ControllerName, ControllerUsbChecked, ControllerBtChecked, BatteryValue, ControllerMessage.CONTROLLER_CONNECT_BT);
+            else
+                ct = ControllerContract.Create(ControllerId, ControllerName, ControllerUsbChecked, ControllerBtChecked, BatteryValue, ControllerMessage.CONTROLLER_DISCONNECT_BT);
 
             sp.SendCommand(ct);
 

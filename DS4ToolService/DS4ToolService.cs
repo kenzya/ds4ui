@@ -52,8 +52,38 @@ namespace DS4ToolService
 
         internal void OnCustomCommand(ControllerContract param)
         {
-            this.EventLog.WriteEntry("Change controller status request");
-            this.publisher.PushCommand(param);
+            switch (param.Message)
+            { 
+                case ControllerMessage.CONTROLLER_CONNECT_USB:
+                    this.EventLog.WriteEntry(ServiceMessages.MESSAGE_CONTROLLER_CONNECT_USB);
+                    this.publisher.PushCommand(param);
+                    break;
+
+                case ControllerMessage.CONTROLLER_CONNECT_BT:
+                    this.EventLog.WriteEntry(ServiceMessages.MESSAGE_CONTROLLER_CONNECT_BT);
+                    this.publisher.PushCommand(param);
+                    break;
+
+                case ControllerMessage.CONTROLLER_DISCONNECT_USB:
+                    this.EventLog.WriteEntry(ServiceMessages.MESSAGE_CONTROLLER_DISCONNECT_USB);
+                    this.publisher.PushCommand(param);
+                    break;
+
+                case ControllerMessage.CONTROLLER_DISCONNECT_BT:
+                    this.EventLog.WriteEntry(ServiceMessages.MESSAGE_CONTROLLER_DISCONNECT_BT);
+                    this.publisher.PushCommand(param);
+                    break;
+
+                case ControllerMessage.CONTROLLER_BATTERY_CHANGE:
+                    this.EventLog.WriteEntry(ServiceMessages.MESSAGE_CONTROLLER_BATTERY_CHANGE);
+                    this.publisher.PushCommand(param);
+                    break;
+
+                case ControllerMessage.NONE:
+                    this.EventLog.WriteEntry("Change controller status request");
+                    this.publisher.PushCommand(param);
+                    break;
+            }
         }
     }
 }
