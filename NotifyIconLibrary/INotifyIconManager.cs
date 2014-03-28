@@ -5,10 +5,10 @@
     /// </summary>
     public interface INotifyIconManager
     {
-        void ShowIcon(int id);
+        void ShowIcon(string id);
         
-        void HideIcon(int id);
+        void HideIcon(string id);
 
-        void SetIcon(int id, bool isUsb, int value, bool isVisible);
+        void SetIcon(string id, bool isUsb, int value, bool isVisible);
     }
 }

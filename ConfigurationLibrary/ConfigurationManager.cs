@@ -3,8 +3,6 @@
     /// <summary>
     /// Library used to read and write configuration data
     /// </summary>
-    /// TODO: considering the similarities a merge with ControllerConfigurationLibrary
-    /// it's a good idea
     public class ConfigurationManager : IConfigurationManager
     {
         #region fields

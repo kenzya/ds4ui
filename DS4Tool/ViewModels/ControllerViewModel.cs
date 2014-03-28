@@ -129,7 +129,7 @@ namespace DS4Tool
             else
                 Status = "Battery " + BatteryValue + "%";
 
-            //IconManager.SetIcon(Id, IsUsbConnected, BatteryValue, ShowIcon ?? false);
+            IconManager.SetIcon(Id, IsUsbConnected, BatteryValue, ShowIcon ?? false);
         }
 
         #endregion // Status
@@ -142,7 +142,7 @@ namespace DS4Tool
             get
             {
                 if (showIcon == null)
-                    showIcon = bool.Parse(ControllerConfigurationManager.GetData(ControllerOptions.SHOW_ICON, Id));
+                    showIcon = bool.Parse(ControllerConfigurationManager.GetData(Id, ControllerOptions.SHOW_ICON));
                 return showIcon;
             }
             set
@@ -152,8 +152,8 @@ namespace DS4Tool
                     showIcon = value;
                     NotifyPropertyChanged(() => ShowIcon);
 
-                    ControllerConfigurationManager.SetData(ControllerOptions.SHOW_ICON, Id, (value ?? false).ToString());
-                    //IconManager.SetIcon(Id, IsUsbConnected, BatteryValue, value ?? false);
+                    ControllerConfigurationManager.SetData(Id, ControllerOptions.SHOW_ICON, (value ?? false).ToString());
+                    IconManager.SetIcon(Id, IsUsbConnected, BatteryValue, value ?? false);
                 }
             }
         }

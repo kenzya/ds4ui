@@ -1,4 +1,1 @@
-- controllerconfigurationlibrary and notifyiconlibrary, remove dictionary and every other stuff, they are instanced for every controller and not defined 
-  just once in applicationmanager. (controllerconfigurationlibrary is necessary? switching to instanced version means is pratically configurationlibrary).
-
 - controls error and show messages. there is pratically 0 checks in the application.

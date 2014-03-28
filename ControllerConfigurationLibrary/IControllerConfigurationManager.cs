@@ -6,8 +6,8 @@ namespace ControllerConfigurationLibrary
     /// </summary>
     public interface IControllerConfigurationManager
     {
-        void SetData(string key, string name, string value);      
-        string GetData(string key, string name);
-        string GetDefault(string key, string name);
+        void SetData(string id, string key, string value);      
+        string GetData(string id, string key);
+        string GetDefault(string id, string key);
     }
 }

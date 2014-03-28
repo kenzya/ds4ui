@@ -16,7 +16,6 @@ namespace ControllerConfigurationLibrary
         private readonly string mainPath;
 
         // Dictionary of the providers (one for each controller)
-        // TODO: replace string with int when we switch to an ID-based system for the controllers
         private readonly Dictionary<string, XmlConfigProvider> dictionary;
 
         #endregion
@@ -27,7 +26,6 @@ namespace ControllerConfigurationLibrary
         /// Constructor. Set the path of the directory and create a provider for each 
         /// configuration file.
         /// </summary>
-        /// <param name="path"></param>
         public ControllerConfigurationManager(string path)
         {
             mainPath = path;
@@ -47,43 +45,47 @@ namespace ControllerConfigurationLibrary
         /// <summary>
         /// Set the value of a controller's configuration property
         /// </summary>
-        /// TODO: switch to int instead of string for key dictionary
-        public void SetData(string key, string name, string value)
+        /// <param name="id">controller id</param>
+        /// <param name="key">option key</param>
+        /// <param name="value">option value</param>
+        public void SetData(string id, string key, string value)
         { 
-            if (!dictionary.ContainsKey(name))
+            if (!dictionary.ContainsKey(id))
             {
-                CreateNewConfiguration(mainPath, name);
+                CreateNewConfiguration(mainPath, id);
             }
 
-            dictionary[name].SetValue(key, value);
+            dictionary[id].SetValue(key, value);
         }
 
         /// <summary>
         /// Get the value of a controller's configuration property
         /// </summary>
-        /// TODO: switch to int instead of string for key dictionary
-        public string GetData(string key, string name)
+        /// <param name="id">controller id</param>
+        /// <param name="key">option key</param>
+        public string GetData(string id, string key)
         {
-            if (!dictionary.ContainsKey(name))
+            if (!dictionary.ContainsKey(id))
             {
-                CreateNewConfiguration(mainPath, name);
+                CreateNewConfiguration(mainPath, id);
             }
 
-            return dictionary[name].GetValue(key);
+            return dictionary[id].GetValue(key);
         }
 
         /// <summary>
         /// Get the default value of a controller's configuration property
         /// </summary>
-        /// TODO: switch to int instead of string for key dictionary
-        public string GetDefault(string key, string name)
+        /// <param name="id">controller id</param>
+        /// <param name="key">option key</param>
+        public string GetDefault(string id, string key)
         {
-            if (!dictionary.ContainsKey(name))
+            if (!dictionary.ContainsKey(id))
             {
-                CreateNewConfiguration(mainPath, name);
+                CreateNewConfiguration(mainPath, id);
             }
 
-            return dictionary[name].GetDefault(key);
+            return dictionary[id].GetDefault(key);
         }
 
         /// <summary>

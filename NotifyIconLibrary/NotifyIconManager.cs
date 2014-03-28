@@ -12,7 +12,7 @@ namespace NotifyIconLibrary
     {
         #region fields
 
-        private readonly Dictionary<int, NotifyIcon> dictionary;
+        private readonly Dictionary<string, NotifyIcon> dictionary;
 
         #endregion
 
@@ -20,7 +20,7 @@ namespace NotifyIconLibrary
 
         public NotifyIconManager()
         {            
-            dictionary = new Dictionary<int, NotifyIcon>();
+            dictionary = new Dictionary<string, NotifyIcon>();
         }
         
         #endregion
@@ -30,7 +30,7 @@ namespace NotifyIconLibrary
         /// <summary>
         /// Show the icon of a controller
         /// </summary>
-        public void ShowIcon(int id)
+        public void ShowIcon(string id)
         {
             if (!dictionary.ContainsKey(id))
                 dictionary.Add(id, new NotifyIcon());
@@ -40,7 +40,7 @@ namespace NotifyIconLibrary
         /// <summary>
         /// Hide the icon of a controller
         /// </summary>
-        public void HideIcon(int id)
+        public void HideIcon(string id)
         {
             if (!dictionary.ContainsKey(id))
                 dictionary.Add(id, new NotifyIcon());
@@ -50,7 +50,7 @@ namespace NotifyIconLibrary
         /// <summary>
         /// Set the icon of a controller based on the battery value
         /// </summary>
-        public void SetIcon(int id, bool isUsb, int value, bool isVisible)
+        public void SetIcon(string id, bool isUsb, int value, bool isVisible)
         {
             if (!dictionary.ContainsKey(id))
                 dictionary.Add(id, new NotifyIcon());
