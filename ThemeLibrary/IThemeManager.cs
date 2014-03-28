@@ -8,7 +8,7 @@ namespace ThemeLibrary
     /// </summary>
     public interface IThemeManager
     {
-        void SetTheme(Application app, string accent, string theme);
+        void SetTheme(string accent, string theme);
 
         IEnumerable<string> GetAccentList();
 

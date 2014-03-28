@@ -1,6 +1,0 @@
-﻿TODO
-- spostare controlli e creazioni directory/files dentro i rispettivi moduli
-- cambiare nomi alle costanti, trasformare in enumeratori dove possibile
-- ListBox scroll all'ultimo item inserito
-- Aggiungere MessageBox del MahApps
-- implementare un IoC e quindi spostare le interfacce direttamente dentro i ViewModel

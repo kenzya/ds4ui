@@ -7,6 +7,7 @@ using CommunicationLibrary;
 using ConfigurationLibrary;
 using ControllerConfigurationLibrary;
 using CoreLibrary;
+using MessengerLibrary;
 using NotifyIconLibrary;
 using ThemeLibrary;
 using TranslationLibrary;
@@ -28,6 +29,7 @@ namespace DS4Tool
         private readonly INotifyIconManager IconManager;
         private readonly IControllerConfigurationManager ControllerConfigurationManager;
         private readonly IThemeManager ThemeManager;
+        private readonly IMessengerManager MessengerManager;
 
         #endregion 
 
@@ -167,7 +169,7 @@ namespace DS4Tool
                     NotifyPropertyChanged(() => SelectedAccent);
                     
                     ConfigurationManager.SetData(ConfOptions.OPTION_ACCENT, value);
-                    ThemeManager.SetTheme(App.Current, value, SelectedTheme);
+                    ThemeManager.SetTheme(value, SelectedTheme);
                 }
             }
         }
@@ -202,7 +204,7 @@ namespace DS4Tool
                     NotifyPropertyChanged(() => SelectedTheme);
 
                     ConfigurationManager.SetData(ConfOptions.OPTION_THEME, value);
-                    ThemeManager.SetTheme(App.Current, SelectedAccent, value);
+                    ThemeManager.SetTheme(SelectedAccent, value);
                 }
             }
         }
@@ -266,8 +268,8 @@ namespace DS4Tool
 
         #region Ctor
 
-        public MainWindowViewModel(IUserManager userManager, IConfigurationManager configurationManager, ITranslationManager translationManager, 
-                                   INotifyIconManager iconManager, IControllerConfigurationManager controllerConfigurationManager, IThemeManager themeManager)
+        public MainWindowViewModel(IUserManager userManager, IConfigurationManager configurationManager, ITranslationManager translationManager, INotifyIconManager iconManager, 
+                                   IControllerConfigurationManager controllerConfigurationManager, IThemeManager themeManager, IMessengerManager messengerManager)
         {
             UserManager = userManager;
             ConfigurationManager = configurationManager;
@@ -275,9 +277,13 @@ namespace DS4Tool
             IconManager = iconManager;
             ControllerConfigurationManager = controllerConfigurationManager;
             ThemeManager = themeManager;
+            MessengerManager = messengerManager;
 
-            App.AppManager.RegisterControllerChange(param => ControllerChangeStatus(param));
-            App.AppManager.RegisterNewLogMessage(param => AddLogMessage(param));
+            MessengerManager.Register<ControllerContract>(AppMessages.CONTROLLER_CHANGE_STATUS, param => ControllerChangeStatus(param));
+            MessengerManager.Register<EventLogEntry>(AppMessages.NEW_LOG_MESSAGE, param => AddLogMessage(param));
+
+            //App.AppManager.RegisterControllerChange(param => ControllerChangeStatus(param));
+            //App.AppManager.RegisterNewLogMessage(param => AddLogMessage(param));
         }
 
         #endregion

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.ServiceModel;
+﻿using System.ServiceModel;
 using CommunicationLibrary;
 using ConfigurationLibrary;
 using ControllerConfigurationLibrary;
@@ -42,11 +40,11 @@ namespace DS4Tool
 
             string a = Configuration.GetData(ConfOptions.OPTION_ACCENT);
             string t = Configuration.GetData(ConfOptions.OPTION_THEME);
-            Theme.SetTheme(App.Current, a, t);
+            Theme.SetTheme(a, t);
 
             Translation.ChangeLanguage(Configuration.GetData(ConfOptions.OPTION_LANGUAGE));
 
-            DuplexChannelFactory<ISubscribingService> pipeFactory = new DuplexChannelFactory<ISubscribingService>(new ServiceCommand(), 
+            DuplexChannelFactory<ISubscribingService> pipeFactory = new DuplexChannelFactory<ISubscribingService>(new ServiceCommand(Messenger), 
                 new NetNamedPipeBinding(), new EndpointAddress(Constants.PIPE_ADDRESS + Constants.SERVICE_NAME));
             Service = pipeFactory.CreateChannel();
             Service.Subscribe();
@@ -55,26 +53,13 @@ namespace DS4Tool
         public void Start()
         {
             MetroMainWindow w = new MetroMainWindow();
-            w.DataContext = new MainWindowViewModel(User, Configuration, Translation, NotifyIcon, Controller, Theme);
+            w.DataContext = new MainWindowViewModel(User, Configuration, Translation, NotifyIcon, Controller, Theme, Messenger);
             w.Show();
         }
         public void Close()
         {
             Logger.Unsubscribe();
             Service.Unsubscribe();
-        }
-
-        public void NotifyControllerChange(ControllerContract status)
-        {
-            Messenger.NotifyColleagues(AppMessages.CONTROLLER_CHANGE_STATUS, status);
-        }
-        public void RegisterControllerChange(Action<ControllerContract> action)
-        {
-            Messenger.Register<ControllerContract>(AppMessages.CONTROLLER_CHANGE_STATUS, action);
-        }
-        public void RegisterNewLogMessage(Action<EventLogEntry> action)
-        {
-            Messenger.Register<EventLogEntry>(AppMessages.NEW_LOG_MESSAGE, action);
         }
     }
 }

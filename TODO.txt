@@ -1,3 +1,0 @@
-﻿TODO
-- switch to enums if suitable
-- implement IoC container

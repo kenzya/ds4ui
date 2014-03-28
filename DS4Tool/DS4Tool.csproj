@@ -265,9 +265,6 @@
     <EmbeddedResource Include="Resources\configuration.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="TODO.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\BTBlack.png" />
     <Resource Include="Images\BTWhite.png" />
     <Resource Include="Images\USBBlack.png" />

@@ -19,14 +19,7 @@ namespace DS4Tool
     /// </summary>
     public partial class App : Application
     {
-        private static ApplicationManager appManager;
-        public static ApplicationManager AppManager
-        {
-            get
-            {
-                return appManager;
-            }
-        }
+        private ApplicationManager appManager;
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {

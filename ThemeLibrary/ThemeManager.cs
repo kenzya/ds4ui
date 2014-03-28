@@ -23,11 +23,11 @@ namespace ThemeLibrary
         /// <summary>
         /// Set the style of the application. It change the accent, the theme and the images
         /// </summary>
-        public void SetTheme(Application app, string accent, string theme)
+        public void SetTheme(string accent, string theme)
         {
             Accent a = MahApps.Metro.ThemeManager.DefaultAccents.Single(x => x.Name == accent);
             Theme t = (Theme)Enum.Parse(typeof(Theme), theme);
-            MahApps.Metro.ThemeManager.ChangeTheme(app, a, t);
+            MahApps.Metro.ThemeManager.ChangeTheme(Application.Current , a, t);
             
             if (t == Theme.Dark)
             {
