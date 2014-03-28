@@ -10,8 +10,8 @@ namespace DS4ToolTester
         private readonly ISendService sp;
         private readonly ServiceInstaller si;
 
-        private int controllerId;
-        public int ControllerId
+        private string controllerId;
+        public string ControllerId
         {
             get
             {
@@ -66,7 +66,7 @@ namespace DS4ToolTester
             }
         }
 
-        public ControllerViewModel(ISendService sendService, ServiceInstaller serviceInstaller, int controllerId, string controllerName, ConnectionTypes connection)
+        public ControllerViewModel(ISendService sendService, ServiceInstaller serviceInstaller, string controllerId, string controllerName, ConnectionTypes connection)
         {
             this.sp = sendService;
             this.si = serviceInstaller;

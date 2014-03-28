@@ -18,9 +18,8 @@ namespace CommunicationLibrary
         /// <summary>
         /// Id of the controller
         /// </summary>
-        /// TODO: use this instead of Name as a key
         [DataMember]
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// Name assigned to the controller
@@ -55,7 +54,7 @@ namespace CommunicationLibrary
         /// <summary>
         /// Create a new Contract to be sent to the pipe
         /// </summary>
-        public static ControllerContract Create(int id, string name, bool isUsbConnected, bool isBluetoothConnected, int batteryValue, ControllerMessage message = ControllerMessage.NONE, bool isIconVisible = false)
+        public static ControllerContract Create(string id, string name, bool isUsbConnected, bool isBluetoothConnected, int batteryValue, ControllerMessage message = ControllerMessage.NONE, bool isIconVisible = false)
         {
             return new ControllerContract
             {

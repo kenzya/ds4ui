@@ -11,7 +11,7 @@
         
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="100"/>
+                <RowDefinition Height="120"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <GroupBox Grid.Row="0" Header="Add Controller">
@@ -20,22 +20,26 @@
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition Width="2*"/>
                     </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="ID:" VerticalAlignment="Center"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding ControllerId}"/>
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Name:" VerticalAlignment="Center"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding ControllerName}"/>
                     
-                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Name:" VerticalAlignment="Center"/>
-                    <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding ControllerName}"/>
-                    
-                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Connection:" VerticalAlignment="Center"/>
-                    <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Connection:" VerticalAlignment="Center"/>
+                    <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
                         <RadioButton VerticalAlignment="Center" Content="USB      " GroupName="protocol" IsChecked="{Binding Path=ConnectionType, Converter={StaticResource converter}, ConverterParameter={x:Static local:ConnectionTypes.USB}}"/>
                         <RadioButton VerticalAlignment="Center" Content="Bluetooth" GroupName="protocol" IsChecked="{Binding Path=ConnectionType, Converter={StaticResource converter}, ConverterParameter={x:Static local:ConnectionTypes.Bluetooth}}"/>
                     </StackPanel>
                     
-                    <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="Connect" Command="{Binding AddController}"/>
+                    <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Content="Connect" Command="{Binding AddController}"/>
                 </Grid>    
             </GroupBox>
             <GroupBox Grid.Row="1" Header="Controllers">

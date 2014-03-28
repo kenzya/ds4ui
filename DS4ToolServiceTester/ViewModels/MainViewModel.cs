@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.ServiceModel;
 using System.ServiceProcess;
+using System.Windows;
 using System.Windows.Input;
 using CommunicationLibrary;
 using CoreLibrary;
@@ -18,7 +19,6 @@ namespace DS4ToolTester
         private readonly ServiceInstaller si;
         private readonly EventLog el;
         private readonly string svcPath;
-        private int id = 0;
 
         /// <summary>
         /// Ctor
@@ -59,6 +59,23 @@ namespace DS4ToolTester
             }
         }
 
+        private string controllerId;
+        public string ControllerId
+        {
+            get 
+            {
+                return controllerId;
+            }
+            set
+            {
+                if (controllerId != value)
+                {
+                    controllerId = value;
+                    NotifyPropertyChanged(() => ControllerId);
+                }
+            }
+        }
+        
         private string controllerName;
         public string ControllerName
         {
@@ -107,7 +124,7 @@ namespace DS4ToolTester
         }
         private void ExecuteAddController()
         {
-            ControllerViewModel c = new ControllerViewModel(sp, si, ++id, ControllerName, ConnectionType);
+            ControllerViewModel c = new ControllerViewModel(sp, si, ControllerId, ControllerName, ConnectionType);
             c.RequestRemove += ExecuteRemoveController;
             Controllers.Add(c);
         }
