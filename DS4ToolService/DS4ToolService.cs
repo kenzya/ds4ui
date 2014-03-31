@@ -24,11 +24,6 @@ namespace DS4ToolService
                 EventLog.CreateEventSource(this.EventLog.Source, this.EventLog.Log);
             }
 
-            SendService sndServ = new SendService(this);
-            ServiceHost svcHost = new ServiceHost(sndServ, new Uri(Constants.PIPE_ADDRESS));
-            svcHost.AddServiceEndpoint(typeof(ISendService), new NetNamedPipeBinding(), "tester");
-            svcHost.Open();
-
             SubscribingService subServ = new SubscribingService(this.EventLog);
             ServiceHost serviceHost = new ServiceHost(subServ, new Uri(Constants.PIPE_ADDRESS));
             serviceHost.AddServiceEndpoint(typeof(ISubscribingService), new NetNamedPipeBinding(), Constants.SERVICE_NAME);
