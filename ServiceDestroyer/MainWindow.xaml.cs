@@ -31,7 +31,7 @@ namespace ServiceDestroyer
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            string svcPath = Path.Combine(Environment.CurrentDirectory, "DS4ToolService.exe");
+            string svcPath = Path.Combine(Environment.CurrentDirectory, Constants.SERVICE_NAME + ".exe");
 
             ServiceController sc = new ServiceController(Constants.SERVICE_NAME, Environment.MachineName);
             ServiceControllerPermission scp = new ServiceControllerPermission(ServiceControllerPermissionAccess.Control, Environment.MachineName, Constants.SERVICE_NAME);
@@ -68,6 +68,18 @@ namespace ServiceDestroyer
                 Directory.Delete(path, true);
                 MessageBox.Show("Configuration deleted");
             }
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            string path = Path.Combine(Environment.CurrentDirectory, Constants.SERVICE_NAME + ".exe");
+            ServiceInstaller si = new ServiceInstaller();
+            si.InstallService(path, Constants.SERVICE_NAME);
+
+            ServiceController sc = new ServiceController(Constants.SERVICE_NAME, Environment.MachineName);
+            new ServiceControllerPermission(ServiceControllerPermissionAccess.Browse, Environment.MachineName, Constants.SERVICE_NAME).Assert();
+            sc.Refresh();
+            sc.WaitForStatus(ServiceControllerStatus.Running);
         }
     }
 
