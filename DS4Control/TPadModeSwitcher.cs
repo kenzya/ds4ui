@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using CommunicationLibrary;
 using DS4Library;
 namespace DS4Control
 {
@@ -45,7 +46,8 @@ namespace DS4Control
             currentTypeInd = ind;
             LogDebug("Touchpad mode for " + device.MacAddress + " is now " + tmode.ToString());
             Log.LogToTray("Touchpad mode for " + device.MacAddress + " is now " + tmode.ToString());
-            Global.ControllerStatusChanged(this);
+            Global.ControllerStatusChanged(this, new StatusChangeEventArgs(device.MacAddress, device.Battery, device.ConnectionType == ConnectionType.USB,
+                                                                            device.ConnectionType == ConnectionType.BT, ControllerMessage.CONTROLLER_TOUCHPAD_CHANGE));
         }
 
         public override string ToString()

@@ -12,5 +12,8 @@ namespace CommunicationLibrary
         // Name of the service
         // TODO: change name according to the service
         public const string SERVICE_NAME = "DS4ToolService";
+
+        // Number of controllers that can be connected
+        public const int MAX_CONTROLLERS = 4;
     }
 }

@@ -77,6 +77,10 @@
     <Compile Include="ScpUtil.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CommunicationLibrary\CommunicationLibrary.csproj">
+      <Project>{76cdb5eb-13ad-413a-a618-843c96749188}</Project>
+      <Name>CommunicationLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DS4Library\DS4Library.csproj">
       <Project>{43e14dad-e6e8-4b66-ac50-20f5cf9b9712}</Project>
       <Name>DS4Library</Name>

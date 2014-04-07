@@ -6,6 +6,7 @@ using System.IO;
 using System.Reflection;
 using System.Xml;
 using DS4Library;
+using CommunicationLibrary;
 namespace DS4Control
 {
     [Flags]
@@ -32,6 +33,49 @@ namespace DS4Control
         public String Data
         {
             get { return m_Data; }
+        }
+    }
+
+    public class StatusChangeEventArgs : EventArgs
+    {
+        protected ControllerMessage message;
+        protected string deviceId;
+        protected int deviceBattery;
+        protected bool usbConnected;
+        protected bool btConnected;
+
+        public StatusChangeEventArgs(string id, int battery, bool usb = false, bool bt = false, ControllerMessage msg = ControllerMessage.NONE)
+        {
+            deviceId = id;
+            deviceBattery = battery;
+            message = msg;
+            usbConnected = usb;
+            btConnected = bt;
+        }
+
+        public ControllerMessage Message
+        {
+            get { return message; }
+        }
+
+        public string DeviceId
+        {
+            get { return deviceId; }
+        }
+
+        public int DeviceBattery
+        {
+            get { return deviceBattery; }
+        }
+
+        public bool UsbConnected
+        {
+            get { return usbConnected; }
+        }
+
+        public bool BtConnected
+        {
+            get { return btConnected; }
         }
     }
 
@@ -81,11 +125,11 @@ namespace DS4Control
         protected static BackingStore m_Config = new BackingStore();
         protected static Int32 m_IdleTimeout = 600000;
 
-        public static event EventHandler<EventArgs> ControllerStatusChange; // called when a controller is added/removed/battery or touchpad mode changes/etc.
-        public static void ControllerStatusChanged(object sender)
+        public static event EventHandler<StatusChangeEventArgs> ControllerStatusChange; // called when a controller is added/removed/battery or touchpad mode changes/etc.
+        public static void ControllerStatusChanged(object sender, StatusChangeEventArgs args)
         {
             if (ControllerStatusChange != null)
-                ControllerStatusChange(sender, EventArgs.Empty);
+                ControllerStatusChange(sender, args);
         }
 
         public static DS4Color loadColor(int device)

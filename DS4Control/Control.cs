@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using CommunicationLibrary;
 using DS4Library;
 namespace DS4Control
 {
@@ -104,6 +105,9 @@ namespace DS4Control
                 {
                     if (DS4Controllers[i] != null)
                     {
+                        Global.ControllerStatusChanged(this, new StatusChangeEventArgs(DS4Controllers[i].MacAddress, DS4Controllers[i].Battery, false, false, 
+                                                            ControllerMessage.CONTROLLER_DISCONNECT));
+
                         x360Bus.Unplug(i + 1);
                         DS4Controllers[i] = null;
                         modeSwitcher[i] = null;
@@ -113,7 +117,6 @@ namespace DS4Control
                 LogDebug("Stopping DS4 Controllers");
                 DS4Devices.stopControllers();
                 LogDebug("Stopped DS4 Tool");
-                Global.ControllerStatusChanged(this);
             }
             return true;
 
@@ -208,7 +211,7 @@ namespace DS4Control
                 Log.LogToTray("Controller " + device.MacAddress + " was removed or lost connection");
                 DS4Controllers[ind] = null;
                 modeSwitcher[ind] = null;
-                Global.ControllerStatusChanged(this);
+                Global.ControllerStatusChanged(this, new StatusChangeEventArgs(device.MacAddress, device.Battery, false, false, ControllerMessage.CONTROLLER_DISCONNECT));
             }
         }
 
@@ -253,7 +256,8 @@ namespace DS4Control
                 // Update the GUI/whatever.
                 DS4LightBar.updateLightBar(device, ind);
                 if (pState.Battery != cState.Battery)
-                    Global.ControllerStatusChanged(this);
+                    Global.ControllerStatusChanged(this, new StatusChangeEventArgs(device.MacAddress, device.Battery, device.ConnectionType == ConnectionType.USB,
+                                                                                   device.ConnectionType == ConnectionType.BT));
 
                 x360Bus.Parse(cState, processingData[ind].Report, ind);
                 // We push the translated Xinput state, and simultaneously we

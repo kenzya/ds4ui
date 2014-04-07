@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿
 namespace CommunicationLibrary
 {
     public enum ControllerMessage
@@ -12,6 +8,8 @@ namespace CommunicationLibrary
         CONTROLLER_CONNECT_BT = 2,
         CONTROLLER_DISCONNECT_USB = 3,
         CONTROLLER_DISCONNECT_BT = 4,
-        CONTROLLER_BATTERY_CHANGE = 5
+        CONTROLLER_DISCONNECT = 5,
+        CONTROLLER_BATTERY_CHANGE = 6,
+        CONTROLLER_TOUCHPAD_CHANGE = 7
     }
 }
