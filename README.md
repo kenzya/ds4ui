@@ -22,8 +22,6 @@ Under development (Alpha 0.1) for Windows.
 
 You will need MahApps.Metro.dll 0.12.1.0 .Net 4.0 version and System.Windows.Interactivity.dll 
 
-## Any problem?
-
 ## Development
 - Run ServiceDestroyer.exe to remove previous version of the service and the configuration directories
 - Run ServiceDestroyer.exe to install the service
