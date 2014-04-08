@@ -4,4 +4,5 @@
 	<language Default="english">english</language>
 	<theme Default="Dark">Dark</theme>
 	<accent Default="Steel">Steel</accent>
+	<exclusive Default="true">true</exclusive>
 </configuration>

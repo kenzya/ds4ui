@@ -117,9 +117,6 @@
     <Compile Include="Views\MainWindowView_Options.xaml.cs">
       <DependentUpon>MainWindowView_Options.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MainWindowView_Controllers.xaml.cs">
-      <DependentUpon>MainWindowView_Controllers.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\ControllerViewMetro.xaml.cs">
       <DependentUpon>ControllerViewMetro.xaml</DependentUpon>
     </Compile>
@@ -142,10 +139,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainWindowView_Options.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\MainWindowView_Controllers.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -249,10 +242,6 @@
       <Project>{b392cf75-1179-414a-b485-57a70227e095}</Project>
       <Name>TranslationLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\UserLibrary\UserLibrary.csproj">
-      <Project>{0293ed0e-af85-4676-be27-b8a77cde1f73}</Project>
-      <Name>UserLibrary</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\DS4Black.png" />
@@ -274,34 +263,40 @@
     <EmbeddedResource Include="Resources\default_controller.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\batt9.ico" />
+    <Resource Include="Images\OptionsBlack.png" />
+    <Resource Include="Images\OptionsWhite.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\batt0.ico" />
+    <Resource Include="Images\AboutBlack.png" />
+    <Resource Include="Images\AboutWhite.png" />
+    <Resource Include="Images\LogsBlack.png" />
+    <Resource Include="Images\LogsWhite.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\batt1.ico" />
+    <Resource Include="Images\0.png" />
+    <Resource Include="Images\10.png" />
+    <Resource Include="Images\100.png" />
+    <Resource Include="Images\20.png" />
+    <Resource Include="Images\30.png" />
+    <Resource Include="Images\40.png" />
+    <Resource Include="Images\50.png" />
+    <Resource Include="Images\60.png" />
+    <Resource Include="Images\70.png" />
+    <Resource Include="Images\80.png" />
+    <Resource Include="Images\90.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\batt2.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\batt3.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\batt4.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\batt5.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\batt6.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\batt7.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\batt8.ico" />
+    <Resource Include="Images\0C.png" />
+    <Resource Include="Images\100C.png" />
+    <Resource Include="Images\10C.png" />
+    <Resource Include="Images\20C.png" />
+    <Resource Include="Images\30C.png" />
+    <Resource Include="Images\40C.png" />
+    <Resource Include="Images\50C.png" />
+    <Resource Include="Images\60C.png" />
+    <Resource Include="Images\70C.png" />
+    <Resource Include="Images\80C.png" />
+    <Resource Include="Images\90C.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

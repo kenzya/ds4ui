@@ -1,11 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <language language="english" version="0.0.3.0" author="Donbabbeo">
-	<line key="label_about_button">ABOUT</line>
-  
-	<line key="header_controllers">Controllers</line>
+	<line key="header_about">About</line>
 	<line key="header_logs">Logs</line>
 	<line key="header_options">Options</line>
 
+	<line key="label_logs_empty">No Messages</line>
+
+	<line key="label_controllers_empty">No Controllers</line>
+	
 	<line key="header_options_general">General</line>
 	<line key="header_options_led">Led</line>
 	<line key="header_options_rumble">Rumble</line>
@@ -14,10 +16,10 @@
 
 	<line key="label_option_controller_icon">Show Icon</line>
 
-	<line key="label_option_window_style">Use Metro Style (require restart)</line>
-	<line key="label_option_theme_color">Color</line>
-	<line key="label_option_theme_base">Theme</line>
+	<line key="label_option_window_style">Metro Style (restart required)</line>
+	<line key="label_option_accent">Color</line>
+	<line key="label_option_theme">Theme</line>
 	<line key="label_option_languages">Languages</line>
-	<line key="label_option_reset">Restore default</line>
 	<line key="label_option_button">Restore Default</line>
+	<line key="label_option_exclusive">Exclusive Mode</line>
 </language>

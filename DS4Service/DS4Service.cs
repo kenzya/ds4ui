@@ -14,6 +14,7 @@ namespace DS4Service
         private readonly IPublishingService publisher;
         private readonly Control rootHub;
         private readonly StreamWriter logWriter;
+        private readonly DS4Events events;
 
         string logFile = Directory.GetParent(Assembly.GetExecutingAssembly().Location).FullName + @"\DS4Service.log";
 
@@ -31,7 +32,9 @@ namespace DS4Service
                 EventLog.CreateEventSource(this.EventLog.Source, this.EventLog.Log);
             }
 
-            SubscribingService subServ = new SubscribingService(this.EventLog);
+            this.events = new DS4Events();
+
+            SubscribingService subServ = new SubscribingService(this, this.EventLog);
             ServiceHost serviceHost = new ServiceHost(subServ, new Uri(Constants.PIPE_ADDRESS));
             serviceHost.AddServiceEndpoint(typeof(ISubscribingService), new NetNamedPipeBinding(), Constants.SERVICE_NAME);
             serviceHost.Open();
@@ -75,7 +78,7 @@ namespace DS4Service
             OnCustomCommand(c);
         }
 
-        protected void OnCustomCommand(ControllerContract param)
+        internal void OnCustomCommand(ControllerContract param)
         {
             switch (param.Message)
             {
@@ -102,6 +105,16 @@ namespace DS4Service
                 case ControllerMessage.CONTROLLER_BATTERY_CHANGE:
                     this.EventLog.WriteEntry(ServiceMessages.MESSAGE_CONTROLLER_BATTERY_CHANGE);
                     this.publisher.PushCommand(param);
+                    break;
+
+                case ControllerMessage.CONTROLLERS_EXCLUSIVE_ENABLED:
+                    this.EventLog.WriteEntry(ServiceMessages.MESSAGE_CONTROLLERS_EXCLUSIVE_ENABLED);
+                    this.events.EnableExclusiveMode();
+                    break;
+
+                case ControllerMessage.CONTROLLERS_EXCLUSIVE_DISABLED:
+                    this.EventLog.WriteEntry(ServiceMessages.MESSAGE_CONTROLLERS_EXCLUSIVE_DISABLED);
+                    this.events.DisableExclusiveMode();
                     break;
 
                 case ControllerMessage.NONE:

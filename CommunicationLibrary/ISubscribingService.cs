@@ -12,7 +12,7 @@ namespace CommunicationLibrary
         /// Send a command to the service
         /// </summary>
         [OperationContract]
-        void SendCommand(int command, object param);
+        void SendCommand(ControllerContract contract);
 
         /// <summary>
         /// Subscribe to receive messages from the service

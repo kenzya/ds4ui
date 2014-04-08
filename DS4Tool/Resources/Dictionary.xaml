@@ -14,6 +14,11 @@
     <BitmapImage x:Key="DS4Image"/>
     <BitmapImage x:Key="USBImage"/>
     <BitmapImage x:Key="BTImage"/>
+
+    <BitmapImage x:Key="OptionsImage" UriSource="/DS4Tool;component/Images/OptionsWhite.png" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
+    <BitmapImage x:Key="AboutImage" UriSource="/DS4Tool;component/Images/AboutWhite.png" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
+    <BitmapImage x:Key="LogsImage" UriSource="/DS4Tool;component/Images/LogsWhite.png" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
+    
     <BitmapImage x:Key="DS4ImageWhite" UriSource="/DS4Tool;component/Images/DS4White.png" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
     <BitmapImage x:Key="DS4ImageBlack" UriSource="/DS4Tool;component/Images/DS4Black.png" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
     <BitmapImage x:Key="USBImageWhite" UriSource="/DS4Tool;component/Images/USBWhite.png" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
@@ -26,12 +31,22 @@
     <Image x:Key="Batt2" Source="/DS4Tool;component/Images/20.png" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
     <Image x:Key="Batt3" Source="/DS4Tool;component/Images/30.png" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
     <Image x:Key="Batt4" Source="/DS4Tool;component/Images/40.png" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
-    <Image x:Key="Batt5" Source="/DS4Tool;component/Images/50.png" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
+    <BitmapImage x:Key="Batt5" UriSource="/DS4Tool;component/Images/50.png" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
     <Image x:Key="Batt6" Source="/DS4Tool;component/Images/60.png" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
     <Image x:Key="Batt7" Source="/DS4Tool;component/Images/70.png" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
     <Image x:Key="Batt8" Source="/DS4Tool;component/Images/80.png" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
     <Image x:Key="Batt9" Source="/DS4Tool;component/Images/90.png" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
     <Image x:Key="Batt10" Source="/DS4Tool;component/Images/100.png" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
-    <BitmapImage x:Key="Batt10+" UriSource="/DS4Tool;component/Images/Charged.png" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
 
+    <Image x:Key="Charging0" Source="/DS4Tool;component/Images/0C.png" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
+    <Image x:Key="Charging1" Source="/DS4Tool;component/Images/10C.png" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
+    <Image x:Key="Charging2" Source="/DS4Tool;component/Images/20C.png" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
+    <Image x:Key="Charging3" Source="/DS4Tool;component/Images/30C.png" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
+    <Image x:Key="Charging4" Source="/DS4Tool;component/Images/40C.png" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
+    <Image x:Key="Charging5" Source="/DS4Tool;component/Images/50C.png" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
+    <Image x:Key="Charging6" Source="/DS4Tool;component/Images/60C.png" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
+    <Image x:Key="Charging7" Source="/DS4Tool;component/Images/70C.png" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
+    <Image x:Key="Charging8" Source="/DS4Tool;component/Images/80C.png" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
+    <Image x:Key="Charging9" Source="/DS4Tool;component/Images/90C.png" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
+    <Image x:Key="Charging10" Source="/DS4Tool;component/Images/100C.png" RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
 </ResourceDictionary>

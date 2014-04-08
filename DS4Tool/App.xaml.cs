@@ -10,7 +10,6 @@ using MessengerLibrary;
 using NotifyIconLibrary;
 using ThemeLibrary;
 using TranslationLibrary;
-using UserLibrary;
 
 namespace DS4Tool
 {
@@ -34,12 +33,11 @@ namespace DS4Tool
             ITranslationManager translation = new TranslationManager(languageDirectory);
             IControllerConfigurationManager controller = new ControllerConfigurationManager(controllerDirectory);
             IMessengerManager messenger = new MessengerManager();
-            IUserManager user = new UserManager();
             INotifyIconManager notifyIcon = new NotifyIconManager();
             IEventLogManager logger = new EventLogManager();
             IThemeManager theme = new ThemeManager();
 
-            appManager = new ApplicationManager(messenger, translation, configuration, user, notifyIcon, logger, controller, theme);
+            appManager = new ApplicationManager(messenger, translation, configuration, notifyIcon, logger, controller, theme);
             appManager.Start();
         }
         private void Application_Exit(object sender, ExitEventArgs e)

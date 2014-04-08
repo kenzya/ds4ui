@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Windows.Media.Imaging;
 
 namespace NotifyIconLibrary
 {
@@ -63,52 +63,52 @@ namespace NotifyIconLibrary
             }
             else if (isUsb)
             {
-                // TO DO: do animation from value to 100
-                dictionary[id].Icon = Icon.FromHandle(((Bitmap)Image.FromFile(Environment.CurrentDirectory + @"\Icons\Charged.png")).GetHicon());
+                // TO DO: do animation from value to 100                                
+                dictionary[id].Icon = Icon.FromHandle(((BitmapImage)System.Windows.Application.Current.Resources["Charging10"]).ToBitmap().GetHicon());
             }
-            else if (value > 0 && value <= 10)
+            else if (value >= 0 && value < 10)
             {
-                dictionary[id].Icon = Icon.FromHandle(((Bitmap)Image.FromFile(Environment.CurrentDirectory + @"\Icons\10.png")).GetHicon());
+                dictionary[id].Icon = Icon.FromHandle(((BitmapImage)System.Windows.Application.Current.Resources["Batt0"]).ToBitmap().GetHicon());
             }
-            else if (value > 10 && value <= 20)
+            else if (value >= 10 && value < 20)
             {
-                dictionary[id].Icon = Icon.FromHandle(((Bitmap)Image.FromFile(Environment.CurrentDirectory + @"\Icons\20.png")).GetHicon());
+                dictionary[id].Icon = Icon.FromHandle(((BitmapImage)System.Windows.Application.Current.Resources["Batt1"]).ToBitmap().GetHicon());
             }
-            else if (value > 20 && value <= 30)
+            else if (value >= 20 && value < 30)
             {
-                dictionary[id].Icon = Icon.FromHandle(((Bitmap)Image.FromFile(Environment.CurrentDirectory + @"\Icons\30.png")).GetHicon());
+                dictionary[id].Icon = Icon.FromHandle(((BitmapImage)System.Windows.Application.Current.Resources["Batt2"]).ToBitmap().GetHicon());
             }
-            else if (value > 30 && value <= 40)
+            else if (value >= 30 && value < 40)
             {
-                dictionary[id].Icon = Icon.FromHandle(((Bitmap)Image.FromFile(Environment.CurrentDirectory + @"\Icons\40.png")).GetHicon());
+                dictionary[id].Icon = Icon.FromHandle(((BitmapImage)System.Windows.Application.Current.Resources["Batt3"]).ToBitmap().GetHicon());
             }
-            else if (value > 40 && value <= 50)
+            else if (value >= 40 && value < 50)
             {
-                dictionary[id].Icon = Icon.FromHandle(((Bitmap)Image.FromFile(Environment.CurrentDirectory + @"\Icons\50.png")).GetHicon());
+                dictionary[id].Icon = Icon.FromHandle(((BitmapImage)System.Windows.Application.Current.Resources["Batt4"]).ToBitmap().GetHicon());
             }
-            else if (value > 50 && value <= 60)
+            else if (value >= 50 && value < 60)
             {
-                dictionary[id].Icon = Icon.FromHandle(((Bitmap)Image.FromFile(Environment.CurrentDirectory + @"\Icons\60.png")).GetHicon());
+                dictionary[id].Icon = Icon.FromHandle(((BitmapImage)System.Windows.Application.Current.Resources["Batt5"]).ToBitmap().GetHicon());
             }
-            else if (value > 60 && value <= 70)
+            else if (value >= 60 && value < 70)
             {
-                dictionary[id].Icon = Icon.FromHandle(((Bitmap)Image.FromFile(Environment.CurrentDirectory + @"\Icons\70.png")).GetHicon());
+                dictionary[id].Icon = Icon.FromHandle(((BitmapImage)System.Windows.Application.Current.Resources["Batt6"]).ToBitmap().GetHicon());
             }
-            else if (value > 70 && value <= 80)
+            else if (value >= 70 && value < 80)
             {
-                dictionary[id].Icon = Icon.FromHandle(((Bitmap)Image.FromFile(Environment.CurrentDirectory + @"\Icons\80.png")).GetHicon());
+                dictionary[id].Icon = Icon.FromHandle(((BitmapImage)System.Windows.Application.Current.Resources["Batt7"]).ToBitmap().GetHicon());
             }
-            else if (value > 80 && value <= 90)
+            else if (value >= 80 && value < 90)
             {
-                dictionary[id].Icon = Icon.FromHandle(((Bitmap)Image.FromFile(Environment.CurrentDirectory + @"\Icons\90.png")).GetHicon());
+                dictionary[id].Icon = Icon.FromHandle(((BitmapImage)System.Windows.Application.Current.Resources["Batt8"]).ToBitmap().GetHicon());
             }
-            else if (value > 90 && value <= 100)
+            else if (value >= 90 && value < 100)
             {
-                dictionary[id].Icon = Icon.FromHandle(((Bitmap)Image.FromFile(Environment.CurrentDirectory + @"\Icons\100.png")).GetHicon());
+                dictionary[id].Icon = Icon.FromHandle(((BitmapImage)System.Windows.Application.Current.Resources["Batt9"]).ToBitmap().GetHicon());
             }
-            else
+            else if (value >= 100)
             {
-                dictionary[id].Icon = Icon.FromHandle(((Bitmap)Image.FromFile(Environment.CurrentDirectory + @"\Icons\0.png")).GetHicon());
+                dictionary[id].Icon = Icon.FromHandle(((BitmapImage)System.Windows.Application.Current.Resources["Batt10"]).ToBitmap().GetHicon());
             }
         }
 

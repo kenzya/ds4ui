@@ -15,5 +15,8 @@ namespace DS4Service
 
         public const string MESSAGE_CLIENT_CONNECTED = "Client connected to the service";
         public const string MESSAGE_CLIENT_DISCONNECTED = "Client disconnected to the service";
+
+        public const string MESSAGE_CONTROLLERS_EXCLUSIVE_ENABLED = "Exclusive mode enabled";
+        public const string MESSAGE_CONTROLLERS_EXCLUSIVE_DISABLED = "Exclusive mode disabled";
     }
 }

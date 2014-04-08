@@ -1,1 +1,0 @@
-- controls error and show messages. there is pratically 0 checks in the application.

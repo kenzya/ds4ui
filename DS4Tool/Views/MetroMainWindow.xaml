@@ -7,36 +7,53 @@
         Title="DS4Tool" Height="400" Width="500" MinHeight="400" MinWidth="500">
     <metro:MetroWindow.WindowCommands>
         <metro:WindowCommands>
-            <Button Content="{lang:Translate label_about_button}" Click="About_Click"/>
+            <Button Command="{Binding TestCmd}" Content="TEST"/>
 
-            <Button>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="{Binding UserName}" Margin="0,0,10,0" VerticalAlignment="Center"/>
-                    <Image Source="{Binding UserImage}" Width="25" Height="25"/>
-                </StackPanel>
+            <Button Click="Logs_Click">
+                <Image Source="{DynamicResource LogsImage}" Width="18" Height="18"/>
             </Button>
 
+            <Button Click="Options_Click">
+                <Image Source="{DynamicResource OptionsImage}" Width="25" Height="25"/>
+            </Button>
+
+            <Button Click="About_Click">
+                <Image Source="{DynamicResource AboutImage}" Width="20" Height="20"/>
+            </Button>
         </metro:WindowCommands>
     </metro:MetroWindow.WindowCommands>
 
     <metro:MetroWindow.Flyouts>
         <metro:FlyoutsControl>
-            <metro:Flyout Header="About" Name="about" Position="Top" Height="200" Theme="Accent" Background="{StaticResource HighlightBrush}">
+            <metro:Flyout Header="{lang:Translate header_about}" Name="about" Position="Top" Height="200" Theme="Accent" Background="{StaticResource HighlightBrush}">
                 <local:MainWindowView_About/>
+            </metro:Flyout>
+            <metro:Flyout Header="{lang:Translate header_options}" Name="options" Position="Top" Height="250" Theme="Accent" Background="{StaticResource HighlightBrush}">
+                <local:MainWindowView_Options/>
+            </metro:Flyout>
+            <metro:Flyout Header="{lang:Translate header_logs}" Name="logs" Position="Top" Height="350" Theme="Accent" Background="{StaticResource HighlightBrush}">
+                <local:MainWindowView_Logs/>
             </metro:Flyout>
         </metro:FlyoutsControl>
     </metro:MetroWindow.Flyouts>
-    <Grid >
-        <metro:MetroAnimatedSingleRowTabControl>
-            <metro:MetroTabItem Header="{lang:Translate header_controllers}">
-                <local:MainWindowView_Controllers/>
-            </metro:MetroTabItem>
-            <metro:MetroTabItem Header="{lang:Translate header_logs}">
-                <local:MainWindowView_Logs/>
-            </metro:MetroTabItem>
-            <TabItem Header="{lang:Translate header_options}">
-                <local:MainWindowView_Options/>
-            </TabItem>
-        </metro:MetroAnimatedSingleRowTabControl>
-    </Grid>    
+
+    <ScrollViewer>
+        <ItemsControl ItemsSource="{Binding Controllers}" Margin="40,10">
+            <ItemsControl.Style>
+                <Style TargetType="ItemsControl">
+                    <Style.Triggers>
+                        <Trigger Property="HasItems" Value="False">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ItemsControl">
+                                        <TextBlock Text="{lang:Translate label_controllers_empty}" Foreground="{DynamicResource HighlightBrush}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ItemsControl.Style>
+        </ItemsControl>
+    </ScrollViewer>
 </metro:MetroWindow>

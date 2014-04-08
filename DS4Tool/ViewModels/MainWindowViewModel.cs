@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
@@ -11,7 +12,6 @@ using MessengerLibrary;
 using NotifyIconLibrary;
 using ThemeLibrary;
 using TranslationLibrary;
-using UserLibrary;
 
 namespace DS4Tool
 {
@@ -22,42 +22,16 @@ namespace DS4Tool
     public class MainWindowViewModel : ViewModelBase
     {
         #region Dependency
-
-        private readonly IUserManager UserManager;
+        
         private readonly IConfigurationManager ConfigurationManager;
         private readonly ITranslationManager TranslationManager;
         private readonly INotifyIconManager IconManager;
         private readonly IControllerConfigurationManager ControllerConfigurationManager;
         private readonly IThemeManager ThemeManager;
         private readonly IMessengerManager MessengerManager;
+        private readonly ISubscribingService SubscribingService;
 
         #endregion 
-
-        #region ToolBar Info
-
-        private string userName;
-        public string UserName
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(userName))
-                    userName = UserManager.GetUserName();
-                return userName;
-            }
-        }
-
-        private string userImage;
-        public string UserImage
-        {
-            get 
-            {
-                if (string.IsNullOrEmpty(userImage))
-                    userImage = UserManager.GetUserImage();
-                return userImage;
-            }
-        }
-
-        #endregion // ToolBar Info
 
         #region Controllers Tab
 
@@ -124,7 +98,7 @@ namespace DS4Tool
             get
             {
                 if (metroStyle == null)
-                    return bool.Parse(ConfigurationManager.GetData(ConfOptions.OPTION_STYLE));
+                    return bool.Parse(ConfigurationManager.GetData(ConfigOptions.OPTION_STYLE));
                 return metroStyle;
             }
             set
@@ -134,7 +108,32 @@ namespace DS4Tool
                     metroStyle = value;
                     NotifyPropertyChanged(() => MetroStyle);
 
-                    ConfigurationManager.SetData(ConfOptions.OPTION_STYLE, (value ?? false).ToString());
+                    ConfigurationManager.SetData(ConfigOptions.OPTION_STYLE, (value ?? false).ToString());
+                }
+            }
+        }
+
+        private bool? exclusiveMode;
+        public bool? ExclusiveMode
+        {
+            get
+            {
+                if (exclusiveMode == null)
+                    return bool.Parse(ConfigurationManager.GetData(ConfigOptions.OPTION_EXCLUSIVE));
+                return exclusiveMode;
+            }
+            set
+            {
+                if (exclusiveMode != value)
+                {
+                    exclusiveMode = value;
+                    NotifyPropertyChanged(() => ExclusiveMode);
+
+                    ConfigurationManager.SetData(ConfigOptions.OPTION_EXCLUSIVE, (value ?? false).ToString());
+                    if (value == true)
+                        SubscribingService.SendCommand(ControllerContract.Create(string.Empty, string.Empty, false, false, -1, ControllerMessage.CONTROLLERS_EXCLUSIVE_ENABLED));
+                    else
+                        SubscribingService.SendCommand(ControllerContract.Create(string.Empty, string.Empty, false, false, -1, ControllerMessage.CONTROLLERS_EXCLUSIVE_DISABLED));
                 }
             }
         }
@@ -158,7 +157,7 @@ namespace DS4Tool
             get
             {
                 if (selectedAccent == null)
-                    return ConfigurationManager.GetData(ConfOptions.OPTION_ACCENT);
+                    return ConfigurationManager.GetData(ConfigOptions.OPTION_ACCENT);
                 return selectedAccent;
             }
             set
@@ -168,7 +167,7 @@ namespace DS4Tool
                     selectedAccent = value;
                     NotifyPropertyChanged(() => SelectedAccent);
                     
-                    ConfigurationManager.SetData(ConfOptions.OPTION_ACCENT, value);
+                    ConfigurationManager.SetData(ConfigOptions.OPTION_ACCENT, value);
                     ThemeManager.SetTheme(value, SelectedTheme);
                 }
             }
@@ -193,7 +192,7 @@ namespace DS4Tool
             get
             {
                 if (selectedTheme == null)
-                    return ConfigurationManager.GetData(ConfOptions.OPTION_THEME);
+                    return ConfigurationManager.GetData(ConfigOptions.OPTION_THEME);
                 return selectedTheme;
             }
             set
@@ -203,7 +202,7 @@ namespace DS4Tool
                     selectedTheme = value;
                     NotifyPropertyChanged(() => SelectedTheme);
 
-                    ConfigurationManager.SetData(ConfOptions.OPTION_THEME, value);
+                    ConfigurationManager.SetData(ConfigOptions.OPTION_THEME, value);
                     ThemeManager.SetTheme(SelectedAccent, value);
                 }
             }
@@ -228,7 +227,7 @@ namespace DS4Tool
             get
             {
                 if (selectedLanguage == null)
-                    return ConfigurationManager.GetData(ConfOptions.OPTION_LANGUAGE);
+                    return ConfigurationManager.GetData(ConfigOptions.OPTION_LANGUAGE);
                 return selectedLanguage;
             }
             set
@@ -238,7 +237,7 @@ namespace DS4Tool
                     selectedLanguage = value;
                     NotifyPropertyChanged(() => SelectedLanguage);
                     
-                    ConfigurationManager.SetData(ConfOptions.OPTION_LANGUAGE, value);
+                    ConfigurationManager.SetData(ConfigOptions.OPTION_LANGUAGE, value);
                     TranslationManager.ChangeLanguage(value);
                 }
             }
@@ -258,34 +257,83 @@ namespace DS4Tool
         }
         private void ExecuteRestore()
         {
-            SelectedAccent = ConfigurationManager.GetDefault(ConfOptions.OPTION_ACCENT);
-            SelectedTheme = ConfigurationManager.GetDefault(ConfOptions.OPTION_THEME);
-            SelectedLanguage = ConfigurationManager.GetDefault(ConfOptions.OPTION_LANGUAGE);
-            MetroStyle = bool.Parse(ConfigurationManager.GetDefault(ConfOptions.OPTION_STYLE));
+            SelectedAccent = ConfigurationManager.GetDefault(ConfigOptions.OPTION_ACCENT);
+            SelectedTheme = ConfigurationManager.GetDefault(ConfigOptions.OPTION_THEME);
+            SelectedLanguage = ConfigurationManager.GetDefault(ConfigOptions.OPTION_LANGUAGE);
+            MetroStyle = bool.Parse(ConfigurationManager.GetDefault(ConfigOptions.OPTION_STYLE));
+            ExclusiveMode = bool.Parse(ConfigurationManager.GetDefault(ConfigOptions.OPTION_EXCLUSIVE));
         }
 
         #endregion
 
         #region Ctor
 
-        public MainWindowViewModel(IUserManager userManager, IConfigurationManager configurationManager, ITranslationManager translationManager, INotifyIconManager iconManager, 
-                                   IControllerConfigurationManager controllerConfigurationManager, IThemeManager themeManager, IMessengerManager messengerManager)
-        {
-            UserManager = userManager;
+        public MainWindowViewModel(IConfigurationManager configurationManager, ITranslationManager translationManager, INotifyIconManager iconManager, 
+            IControllerConfigurationManager controllerConfigurationManager, IThemeManager themeManager, IMessengerManager messengerManager, 
+            ISubscribingService subscribingService)
+        {            
             ConfigurationManager = configurationManager;
             TranslationManager = translationManager;
             IconManager = iconManager;
             ControllerConfigurationManager = controllerConfigurationManager;
             ThemeManager = themeManager;
             MessengerManager = messengerManager;
+            SubscribingService = subscribingService;
 
             MessengerManager.Register<ControllerContract>(AppMessages.CONTROLLER_CHANGE_STATUS, param => ControllerChangeStatus(param));
             MessengerManager.Register<EventLogEntry>(AppMessages.NEW_LOG_MESSAGE, param => AddLogMessage(param));
-
-            //App.AppManager.RegisterControllerChange(param => ControllerChangeStatus(param));
-            //App.AppManager.RegisterNewLogMessage(param => AddLogMessage(param));
         }
 
         #endregion
+
+        int i = 0;
+        private DelegateCommand testCmd;
+        public ICommand TestCmd
+        {
+            get
+            {
+                if (testCmd == null)
+                {
+                    testCmd = new DelegateCommand(param => Test());
+                }
+                return testCmd;
+            }
+        }
+        private void Test()
+        {
+            i++;
+            ControllerContract c = ControllerContract.Create(i.ToString(), "N° " + i, false, true, 50, ControllerMessage.CONTROLLER_CONNECT_USB, true);
+            ControllerChangeStatus(c);
+            AddLogMessage(new TestLog("N° " + i + " added"));
+        }
+
+        private CustomCollection<TestLog> messageList2;
+        public CustomCollection<TestLog> MessageList2
+        {
+            get
+            {
+                if (messageList2 == null)
+                {
+                    messageList2 = new CustomCollection<TestLog>();
+                }
+                return messageList2;
+            }
+        }
+        private void AddLogMessage(TestLog message)
+        {
+            MessageList2.Insert(0, message);
+        }
+
+        public class TestLog
+        {
+            public string Message { get; set; }
+            public string TimeGenerated { get; set; }
+
+            public TestLog(string msg)
+            {
+                Message = msg;
+                TimeGenerated = DateTime.Now.ToLongTimeString();
+            }
+        }
     }
 }

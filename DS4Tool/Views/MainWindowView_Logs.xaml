@@ -1,13 +1,40 @@
 ﻿<UserControl x:Class="DS4Tool.MainWindowView_Logs"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:DS4Tool">
-    <ListView Margin="40,0" ItemsSource="{Binding MessageList}" BorderThickness="0">
-        <ListView.View>
-            <GridView ColumnHeaderContainerStyle="{StaticResource CollapsedHeader}" >
-                <GridViewColumn DisplayMemberBinding="{Binding Message}" />
-                <GridViewColumn DisplayMemberBinding="{Binding TimeGenerated}" />
-            </GridView>
-        </ListView.View>
-    </ListView>
+             xmlns:local="clr-namespace:DS4Tool"
+             xmlns:lang="clr-namespace:TranslationLibrary;assembly=TranslationLibrary">
+    <Grid Margin="10,30" VerticalAlignment="Stretch">
+        <Grid Visibility="Hidden" Margin="10">
+            <Grid.ColumnDefinitions>                
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" x:Name="logMessage"/>
+            <Grid Grid.Column="1" x:Name="logData"/>
+        </Grid>
+
+        <ListView ItemsSource="{Binding MessageList}" BorderThickness="0" Background="Transparent">
+            <ListView.Style>
+                <Style TargetType="ListView">
+                    <Style.Triggers>
+                        <Trigger Property="HasItems" Value="False">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListView">
+                                        <TextBlock Text="{lang:Translate label_logs_empty}" Foreground="{DynamicResource BlackBrush}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.Style>
+            <ListView.View>
+                <GridView ColumnHeaderContainerStyle="{StaticResource CollapsedHeader}">
+                    <GridViewColumn DisplayMemberBinding="{Binding Message}" Width="{Binding ElementName=logMessage, Path=ActualWidth}"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding TimeGenerated}" Width="{Binding ElementName=logData, Path=ActualWidth}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
 </UserControl>

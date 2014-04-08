@@ -1,20 +1,22 @@
-﻿using CommunicationLibrary;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.ServiceModel;
+using CommunicationLibrary;
 
 namespace DS4Service
 {
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
     public class SubscribingService : ISubscribingService
     {
+        private readonly DS4Service service;
         private readonly EventLog eventLog;
         private static Collection<IPublishingService> subscribers;
 
-        public SubscribingService(EventLog logger)
+        public SubscribingService(DS4Service service, EventLog logger)
         {
-            eventLog = logger;
+            this.service = service;
+            this.eventLog = logger;
             subscribers = new Collection<IPublishingService>();
         }
 
@@ -48,9 +50,9 @@ namespace DS4Service
             }
         }
 
-        public void SendCommand(int command, object param)
+        public void SendCommand(ControllerContract param)
         {
-            throw new System.NotImplementedException();
+            service.OnCustomCommand(param);
         }
     }
 }

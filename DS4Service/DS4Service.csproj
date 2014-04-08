@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="Communications\PublishingService.cs" />
     <Compile Include="Communications\SubscribingService.cs" />
+    <Compile Include="DS4Events.cs" />
     <Compile Include="DS4Service.cs">
       <SubType>Component</SubType>
     </Compile>
