@@ -4,13 +4,15 @@ using System.IO;
 using System.Reflection;
 using System.ServiceModel;
 using System.ServiceProcess;
+using System.Windows;
 using CommunicationLibrary;
 using DS4Control;
+using TranslationLibrary;
 
 namespace DS4Service
 {
     public partial class DS4Service : ServiceBase
-    {
+    {        
         private readonly IPublishingService publisher;
         private readonly Control rootHub;
         private readonly StreamWriter logWriter;
@@ -56,7 +58,7 @@ namespace DS4Service
 
         protected override void OnStart(string[] args)
         {
-            rootHub.Start();
+            rootHub.Start();            
             this.EventLog.WriteEntry(ServiceMessages.MESSAGE_START);
         }
 
@@ -74,7 +76,7 @@ namespace DS4Service
 
         protected void ControllerStatusChange(object sender, StatusChangeEventArgs e)
         {
-            ControllerContract c = ControllerContract.Create(e.DeviceId, string.Empty, e.UsbConnected, e.BtConnected, e.DeviceBattery, e.Message);
+            ControllerContract c = ControllerContract.Create(e.DeviceId, e.UsbConnected, e.BtConnected, e.DeviceBattery, e.Message);
             OnCustomCommand(c);
         }
 
@@ -118,7 +120,7 @@ namespace DS4Service
                     break;
 
                 case ControllerMessage.NONE:
-                    this.EventLog.WriteEntry("Change controller status request");
+                    this.EventLog.WriteEntry(ServiceMessages.MESSAGE_CONTROLLER_CHANGE_STATUS);
                     this.publisher.PushCommand(param);
                     break;
             }

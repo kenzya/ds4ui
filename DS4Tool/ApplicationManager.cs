@@ -35,11 +35,11 @@ namespace DS4Tool
             Logger.Initialize(Constants.SERVICE_NAME);
             Logger.Subscribe(param => Messenger.NotifyColleagues(AppMessages.NEW_LOG_MESSAGE, param.Entry));
 
+            Translation.ChangeLanguage(Configuration.GetData(ConfigOptions.OPTION_LANGUAGE));
+            
             string a = Configuration.GetData(ConfigOptions.OPTION_ACCENT);
             string t = Configuration.GetData(ConfigOptions.OPTION_THEME);
             Theme.SetTheme(a, t);
-
-            Translation.ChangeLanguage(Configuration.GetData(ConfigOptions.OPTION_LANGUAGE));
 
             DuplexChannelFactory<ISubscribingService> pipeFactory = new DuplexChannelFactory<ISubscribingService>(new ServiceCommand(Messenger), 
                 new NetNamedPipeBinding(), new EndpointAddress(Constants.PIPE_ADDRESS + Constants.SERVICE_NAME));
@@ -49,7 +49,7 @@ namespace DS4Tool
 
         public void Start()
         {
-            MetroMainWindow w = new MetroMainWindow();
+            MetroMainWindow w = new MetroMainWindow();            
             w.DataContext = new MainWindowViewModel(Configuration, Translation, NotifyIcon, Controller, Theme, Messenger, Service);
             w.Show();
         }

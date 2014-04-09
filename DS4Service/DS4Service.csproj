@@ -53,6 +53,10 @@
       <Project>{373e430e-7b4d-4005-89d5-f553ae67eb66}</Project>
       <Name>DS4Library</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TranslationLibrary\TranslationLibrary.csproj">
+      <Project>{b392cf75-1179-414a-b485-57a70227e095}</Project>
+      <Name>TranslationLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Communications\PublishingService.cs" />

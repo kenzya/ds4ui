@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace DS4Tool
 {
@@ -8,8 +9,6 @@ namespace DS4Tool
     /// </summary>
     public partial class MetroMainWindow : MetroWindow
     {
-        //using MahApps.Metro.Controls.Dialogs; DialogManager.ShowMessageAsync(this, "TEST", "Message test whatever");
-
         public MetroMainWindow()
         {
             InitializeComponent();

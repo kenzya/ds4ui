@@ -54,7 +54,37 @@ namespace CommunicationLibrary
         /// <summary>
         /// Create a new Contract to be sent to the pipe
         /// </summary>
-        public static ControllerContract Create(string id, string name, bool isUsbConnected, bool isBluetoothConnected, int batteryValue, ControllerMessage message = ControllerMessage.NONE, bool isIconVisible = false)
+        public static ControllerContract Create(ControllerMessage message)
+        {
+            return new ControllerContract
+            {
+                Message = message
+            };
+        }
+        public static ControllerContract Create(string id, bool isUsbConnected, bool isBluetoothConnected, int batteryValue, ControllerMessage message)
+        {
+            return new ControllerContract
+            {
+                Message = message,
+                Id = id,
+                IsUsbConnected = isUsbConnected,
+                IsBluetoothConnected = isBluetoothConnected,
+                BatteryValue = batteryValue
+            };
+        }
+        public static ControllerContract Create(string id, string name, bool isUsbConnected, bool isBluetoothConnected, int batteryValue, ControllerMessage message)
+        {
+            return new ControllerContract
+            {
+                Message = message,
+                Id = id,
+                Name = name,
+                IsUsbConnected = isUsbConnected,
+                IsBluetoothConnected = isBluetoothConnected,
+                BatteryValue = batteryValue
+            };
+        }
+        public static ControllerContract Create(string id, string name, bool isUsbConnected, bool isBluetoothConnected, int batteryValue, ControllerMessage message, bool isIconVisible)
         {
             return new ControllerContract
             {

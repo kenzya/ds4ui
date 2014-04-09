@@ -22,4 +22,17 @@
 	<line key="label_option_languages">Languages</line>
 	<line key="label_option_button">Restore Default</line>
 	<line key="label_option_exclusive">Exclusive Mode</line>
+
+	<line key="Service started">Service started</line>
+	<line key="Service stopped">Service stopped</line>	
+	<line key="Controller connected through USB">Controller connected through USB</line>
+	<line key="Controller connected through Bluetooth">Controller connected through Bluetooth</line>
+	<line key="Controller disconnected from USB">Controller disconnected from USB</line>
+	<line key="Controller disconnected from Bluetooth">Controller disconnected from Bluetooth</line>
+	<line key="Battery charge changed">Battery charge changed</line>
+	<line key="Change controller status request">Change controller status request</line>
+	<line key="Client connected to the service">Client connected to the service</line>
+	<line key="Client disconnected to the service">Client disconnected to the service</line>
+	<line key="Exclusive mode enabled">Exclusive mode enabled</line>
+	<line key="Exclusive mode disabled">Exclusive mode disabled</line>
 </language>

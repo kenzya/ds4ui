@@ -85,7 +85,7 @@ namespace DS4Tool
 
         private void AddLogMessage(EventLogEntry message)
         {
-            MessageList.Insert(0, message);
+            MessageList.Add(message);
         }
 
         #endregion // Log Tab
@@ -131,9 +131,9 @@ namespace DS4Tool
 
                     ConfigurationManager.SetData(ConfigOptions.OPTION_EXCLUSIVE, (value ?? false).ToString());
                     if (value == true)
-                        SubscribingService.SendCommand(ControllerContract.Create(string.Empty, string.Empty, false, false, -1, ControllerMessage.CONTROLLERS_EXCLUSIVE_ENABLED));
+                        SubscribingService.SendCommand(ControllerContract.Create(ControllerMessage.CONTROLLERS_EXCLUSIVE_ENABLED));
                     else
-                        SubscribingService.SendCommand(ControllerContract.Create(string.Empty, string.Empty, false, false, -1, ControllerMessage.CONTROLLERS_EXCLUSIVE_DISABLED));
+                        SubscribingService.SendCommand(ControllerContract.Create(ControllerMessage.CONTROLLERS_EXCLUSIVE_DISABLED));
                 }
             }
         }
@@ -302,9 +302,10 @@ namespace DS4Tool
         private void Test()
         {
             i++;
-            ControllerContract c = ControllerContract.Create(i.ToString(), "N° " + i, false, true, 50, ControllerMessage.CONTROLLER_CONNECT_USB, true);
+            ControllerContract c = ControllerContract.Create(i.ToString(), "N° " + i, false, true, 50, ControllerMessage.CONTROLLER_CONNECT);
             ControllerChangeStatus(c);
-            AddLogMessage(new TestLog("N° " + i + " added"));
+            AddLogMessage(new TestLog("Prova", TranslationManager));
+            AddLogMessage(new TestLog("Ciao", TranslationManager));
         }
 
         private CustomCollection<TestLog> messageList2;
@@ -329,9 +330,9 @@ namespace DS4Tool
             public string Message { get; set; }
             public string TimeGenerated { get; set; }
 
-            public TestLog(string msg)
+            public TestLog(string msg, ITranslationManager trans)
             {
-                Message = msg;
+                Message = trans.Translate(msg).ToString();
                 TimeGenerated = DateTime.Now.ToLongTimeString();
             }
         }

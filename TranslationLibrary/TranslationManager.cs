@@ -138,7 +138,7 @@ namespace TranslationLibrary
                     return value;
                 }
             }
-            return string.Format("!{0}!", key);
+            return key;
         }
 
         #endregion // methods
