@@ -14,13 +14,13 @@ Under development (Alpha 0.1) for Windows.
 
 **Currently used:**
 - [MahApps.Metro](http://mahapps.com/MahApps.Metro/) UI Toolkit for WPF
-- [MVVM Foundation](http://mvvmfoundation.codeplex.com/) for Messenger implementation
+- [TaskbarNotification](http://www.codeproject.com/Articles/36468/WPF-NotifyIcon) NotificationIcon for WPF
 
 ## Building
 
 ### Dependencies
 
-You will need MahApps.Metro.dll 0.12.1.0 .Net 4.0 version and System.Windows.Interactivity.dll 
+You will need MahApps.Metro.dll 0.12.1.0 .Net 4.0 version, System.Windows.Interactivity.dll and TaskbarNotification.dll 1.0.5.0
 
 ## Any problem?
 

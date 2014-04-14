@@ -301,30 +301,28 @@
     <Resource Include="Images\LogsWhite.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\0.png" />
-    <Resource Include="Images\10.png" />
-    <Resource Include="Images\100.png" />
-    <Resource Include="Images\20.png" />
-    <Resource Include="Images\30.png" />
-    <Resource Include="Images\40.png" />
-    <Resource Include="Images\50.png" />
-    <Resource Include="Images\60.png" />
-    <Resource Include="Images\70.png" />
-    <Resource Include="Images\80.png" />
-    <Resource Include="Images\90.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\0C.png" />
-    <Resource Include="Images\100C.png" />
-    <Resource Include="Images\10C.png" />
-    <Resource Include="Images\20C.png" />
-    <Resource Include="Images\30C.png" />
-    <Resource Include="Images\40C.png" />
-    <Resource Include="Images\50C.png" />
-    <Resource Include="Images\60C.png" />
-    <Resource Include="Images\70C.png" />
-    <Resource Include="Images\80C.png" />
-    <Resource Include="Images\90C.png" />
+    <Resource Include="Images\0.ico" />
+    <Resource Include="Images\0C.ico" />
+    <Resource Include="Images\10.ico" />
+    <Resource Include="Images\100.ico" />
+    <Resource Include="Images\100C.ico" />
+    <Resource Include="Images\10C.ico" />
+    <Resource Include="Images\20.ico" />
+    <Resource Include="Images\20C.ico" />
+    <Resource Include="Images\30.ico" />
+    <Resource Include="Images\30C.ico" />
+    <Resource Include="Images\40.ico" />
+    <Resource Include="Images\40C.ico" />
+    <Resource Include="Images\50.ico" />
+    <Resource Include="Images\50C.ico" />
+    <Resource Include="Images\60.ico" />
+    <Resource Include="Images\60C.ico" />
+    <Resource Include="Images\70.ico" />
+    <Resource Include="Images\70C.ico" />
+    <Resource Include="Images\80.ico" />
+    <Resource Include="Images\80C.ico" />
+    <Resource Include="Images\90.ico" />
+    <Resource Include="Images\90C.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

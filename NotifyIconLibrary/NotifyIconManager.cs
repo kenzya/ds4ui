@@ -1,7 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
-using System.Windows.Forms;
+using System.Reflection;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using TaskbarNotification;
 
 namespace NotifyIconLibrary
 {
@@ -12,15 +16,15 @@ namespace NotifyIconLibrary
     {
         #region fields
 
-        private readonly Dictionary<string, NotifyIcon> dictionary;
+        private readonly Dictionary<string, TaskbarIcon> dictionary;
 
         #endregion
 
         #region constructor
 
         public NotifyIconManager()
-        {            
-            dictionary = new Dictionary<string, NotifyIcon>();
+        {
+            dictionary = new Dictionary<string, TaskbarIcon>();
         }
         
         #endregion
@@ -33,8 +37,8 @@ namespace NotifyIconLibrary
         public void ShowIcon(string id)
         {
             if (!dictionary.ContainsKey(id))
-                dictionary.Add(id, new NotifyIcon());
-            dictionary[id].Visible = true;            
+                dictionary.Add(id, new TaskbarIcon());
+            dictionary[id].Visibility = Visibility.Visible;
         }
 
         /// <summary>
@@ -43,8 +47,8 @@ namespace NotifyIconLibrary
         public void HideIcon(string id)
         {
             if (!dictionary.ContainsKey(id))
-                dictionary.Add(id, new NotifyIcon());
-            dictionary[id].Visible = false;            
+                dictionary.Add(id, new TaskbarIcon());
+            dictionary[id].Visibility = Visibility.Hidden;  
         }
 
         /// <summary>
@@ -53,62 +57,73 @@ namespace NotifyIconLibrary
         public void SetIcon(string id, bool isUsb, int value, bool isVisible)
         {
             if (!dictionary.ContainsKey(id))
-                dictionary.Add(id, new NotifyIcon());
+                dictionary.Add(id, new TaskbarIcon());
 
-            dictionary[id].Visible = isVisible;
-            
             if (isVisible == false)
             {
+                dictionary[id].Visibility = Visibility.Hidden;
                 return;
             }
             else if (isUsb)
             {
                 // TO DO: do animation from value to 100                                
-                dictionary[id].Icon = Icon.FromHandle(((BitmapImage)System.Windows.Application.Current.Resources["Charging10"]).ToBitmap().GetHicon());
+                dictionary[id].Visibility = Visibility.Visible;
+                dictionary[id].Icon = new Icon(Application.GetResourceStream(new Uri("/DS4Tool;component/Images/10C.ico", UriKind.Relative)).Stream);
             }
             else if (value >= 0 && value < 10)
             {
-                dictionary[id].Icon = Icon.FromHandle(((BitmapImage)System.Windows.Application.Current.Resources["Batt0"]).ToBitmap().GetHicon());
+                dictionary[id].Visibility = Visibility.Visible;
+                dictionary[id].Icon = new Icon(Application.GetResourceStream(new Uri("/DS4Tool;component/Images/0.ico", UriKind.Relative)).Stream);
             }
             else if (value >= 10 && value < 20)
             {
-                dictionary[id].Icon = Icon.FromHandle(((BitmapImage)System.Windows.Application.Current.Resources["Batt1"]).ToBitmap().GetHicon());
+                dictionary[id].Visibility = Visibility.Visible;
+                dictionary[id].Icon = new Icon(Application.GetResourceStream(new Uri("/DS4Tool;component/Images/10.ico", UriKind.Relative)).Stream);
             }
             else if (value >= 20 && value < 30)
             {
-                dictionary[id].Icon = Icon.FromHandle(((BitmapImage)System.Windows.Application.Current.Resources["Batt2"]).ToBitmap().GetHicon());
+                dictionary[id].Visibility = Visibility.Visible;
+                dictionary[id].Icon = new Icon(Application.GetResourceStream(new Uri("/DS4Tool;component/Images/20.ico", UriKind.Relative)).Stream);
             }
             else if (value >= 30 && value < 40)
             {
-                dictionary[id].Icon = Icon.FromHandle(((BitmapImage)System.Windows.Application.Current.Resources["Batt3"]).ToBitmap().GetHicon());
+                dictionary[id].Visibility = Visibility.Visible;
+                dictionary[id].Icon = new Icon(Application.GetResourceStream(new Uri("/DS4Tool;component/Images/30.ico", UriKind.Relative)).Stream);
             }
             else if (value >= 40 && value < 50)
             {
-                dictionary[id].Icon = Icon.FromHandle(((BitmapImage)System.Windows.Application.Current.Resources["Batt4"]).ToBitmap().GetHicon());
+                dictionary[id].Visibility = Visibility.Visible;
+                dictionary[id].Icon = new Icon(Application.GetResourceStream(new Uri("/DS4Tool;component/Images/40.ico", UriKind.Relative)).Stream);
             }
             else if (value >= 50 && value < 60)
             {
-                dictionary[id].Icon = Icon.FromHandle(((BitmapImage)System.Windows.Application.Current.Resources["Batt5"]).ToBitmap().GetHicon());
+                dictionary[id].Visibility = Visibility.Visible;                
+                dictionary[id].Icon = new Icon(Application.GetResourceStream(new Uri("/DS4Tool;component/Images/50.ico", UriKind.Relative)).Stream);
             }
             else if (value >= 60 && value < 70)
             {
-                dictionary[id].Icon = Icon.FromHandle(((BitmapImage)System.Windows.Application.Current.Resources["Batt6"]).ToBitmap().GetHicon());
+                dictionary[id].Visibility = Visibility.Visible;
+                dictionary[id].Icon = new Icon(Application.GetResourceStream(new Uri("/DS4Tool;component/Images/60.ico", UriKind.Relative)).Stream);
             }
             else if (value >= 70 && value < 80)
             {
-                dictionary[id].Icon = Icon.FromHandle(((BitmapImage)System.Windows.Application.Current.Resources["Batt7"]).ToBitmap().GetHicon());
+                dictionary[id].Visibility = Visibility.Visible;
+                dictionary[id].Icon = new Icon(Application.GetResourceStream(new Uri("/DS4Tool;component/Images/70.ico", UriKind.Relative)).Stream);
             }
             else if (value >= 80 && value < 90)
             {
-                dictionary[id].Icon = Icon.FromHandle(((BitmapImage)System.Windows.Application.Current.Resources["Batt8"]).ToBitmap().GetHicon());
+                dictionary[id].Visibility = Visibility.Visible;
+                dictionary[id].Icon = new Icon(Application.GetResourceStream(new Uri("/DS4Tool;component/Images/80.ico", UriKind.Relative)).Stream);
             }
             else if (value >= 90 && value < 100)
             {
-                dictionary[id].Icon = Icon.FromHandle(((BitmapImage)System.Windows.Application.Current.Resources["Batt9"]).ToBitmap().GetHicon());
+                dictionary[id].Visibility = Visibility.Visible;
+                dictionary[id].Icon = new Icon(Application.GetResourceStream(new Uri("/DS4Tool;component/Images/90.ico", UriKind.Relative)).Stream);
             }
             else if (value >= 100)
             {
-                dictionary[id].Icon = Icon.FromHandle(((BitmapImage)System.Windows.Application.Current.Resources["Batt10"]).ToBitmap().GetHicon());
+                dictionary[id].Visibility = Visibility.Visible;
+                dictionary[id].Icon = new Icon(Application.GetResourceStream(new Uri("/DS4Tool;component/Images/100.ico", UriKind.Relative)).Stream);
             }
         }
 
