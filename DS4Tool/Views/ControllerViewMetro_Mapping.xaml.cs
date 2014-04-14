@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace DS4Tool
 {
     /// <summary>
-    /// Logica di interazione per ControllerViewMetro_Options_General.xaml
+    /// Logica di interazione per ControllerViewMetro_Mapping.xaml
     /// </summary>
-    public partial class ControllerViewMetro_Options_General : UserControl
+    public partial class ControllerViewMetro_Mapping : UserControl
     {
-        public ControllerViewMetro_Options_General()
+        public ControllerViewMetro_Mapping()
         {
             InitializeComponent();
         }

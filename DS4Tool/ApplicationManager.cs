@@ -1,4 +1,5 @@
 ﻿using System.ServiceModel;
+using System.Windows;
 using CommunicationLibrary;
 using ConfigurationLibrary;
 using ControllerConfigurationLibrary;
@@ -52,6 +53,11 @@ namespace DS4Tool
             MetroMainWindow w = new MetroMainWindow();            
             w.DataContext = new MainWindowViewModel(Configuration, Translation, NotifyIcon, Controller, Theme, Messenger, Service);
             w.Show();
+
+            if (bool.Parse(Configuration.GetData(ConfigOptions.OPTION_MINIMIZED)))
+                w.WindowState = WindowState.Minimized;
+            else
+                w.WindowState = WindowState.Normal;
         }
         public void Close()
         {

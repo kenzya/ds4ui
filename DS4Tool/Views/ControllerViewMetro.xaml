@@ -30,20 +30,20 @@
         </control:CustomExpander.Header>
         <control:CustomExpander.Container>
             <metro:MetroAnimatedSingleRowTabControl TabStripPlacement="Left">
-                <metro:MetroTabItem Header="{lang:Translate header_options_general}">
-                    <local:ControllerViewMetro_Options_General/>
+                <metro:MetroTabItem Header="A">
+                    <local:ControllerViewMetro_Lightbar/>
                 </metro:MetroTabItem>
-                <metro:MetroTabItem Header="{lang:Translate header_options_led}">
-                    <TextBlock Text="Text"/>
+                <metro:MetroTabItem Header="B">
+                    <local:ControllerViewMetro_Touchpad/>
                 </metro:MetroTabItem>
-                <metro:MetroTabItem Header="{lang:Translate header_options_rumble}">
-                    <TextBlock Text="Text"/>
+                <metro:MetroTabItem Header="C">
+                    <local:ControllerViewMetro_Rumble/>
                 </metro:MetroTabItem>
-                <metro:MetroTabItem Header="{lang:Translate header_options_touchpad}">
-                    <TextBlock Text="Text"/>
+                <metro:MetroTabItem Header="D">
+                    <local:ControllerViewMetro_Tuning/>
                 </metro:MetroTabItem>
-                <metro:MetroTabItem Header="{lang:Translate header_options_keymap}">
-                    <TextBlock Text="Text"/>
+                <metro:MetroTabItem Header="E">
+                    <local:ControllerViewMetro_Mapping/>
                 </metro:MetroTabItem>
             </metro:MetroAnimatedSingleRowTabControl>
         </control:CustomExpander.Container>

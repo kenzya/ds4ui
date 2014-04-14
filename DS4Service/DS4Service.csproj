@@ -68,6 +68,7 @@
     <Compile Include="DS4ServiceInstaller.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Utils\Extensions.cs" />
     <Compile Include="Utils\ServiceMessages.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -8,5 +8,6 @@ namespace DS4Tool
         public const string OPTION_ACCENT = "accent";
         public const string OPTION_THEME = "theme";
         public const string OPTION_EXCLUSIVE = "exclusive";
+        public const string OPTION_MINIMIZED = "minimized";
     }
 }

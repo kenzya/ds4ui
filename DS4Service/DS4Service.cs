@@ -109,14 +109,89 @@ namespace DS4Service
                     this.publisher.PushCommand(param);
                     break;
 
-                case ControllerMessage.CONTROLLERS_EXCLUSIVE_ENABLED:
-                    this.EventLog.WriteEntry(ServiceMessages.MESSAGE_CONTROLLERS_EXCLUSIVE_ENABLED);
-                    this.events.EnableExclusiveMode();
+                case ControllerMessage.CONTROLLERS_EXCLUSIVE_MODE:
+                    this.EventLog.WriteEntry(ServiceMessages.MESSAGE_CONTROLLERS_EXCLUSIVE_MODE);
+                    this.events.ChangeExclusive(param);
                     break;
 
-                case ControllerMessage.CONTROLLERS_EXCLUSIVE_DISABLED:
-                    this.EventLog.WriteEntry(ServiceMessages.MESSAGE_CONTROLLERS_EXCLUSIVE_DISABLED);
-                    this.events.DisableExclusiveMode();
+                case ControllerMessage.CONTROLLER_LED_COLOR:
+                    this.EventLog.WriteEntry(ServiceMessages.MESSAGE_CONTROLLER_LED_COLOR_CHANGE);
+                    this.events.ChangeLedColor(param);
+                    break;
+
+                case ControllerMessage.CONTROLLER_LED_FLASH:
+                    this.EventLog.WriteEntry(ServiceMessages.MESSAGE_CONTROLLER_LED_FLASH);
+                    this.events.ChangeLedFlash(param);
+                    break;
+
+                case ControllerMessage.CONTROLLER_LED_BATTERY:
+                    this.EventLog.WriteEntry(ServiceMessages.MESSAGE_CONTROLLER_LED_BATTERY);
+                    this.events.ChangeLedBattery(param);
+                    break;
+
+                case ControllerMessage.CONTROLLER_TOUCH_VALUE:
+                    this.EventLog.WriteEntry(ServiceMessages.MESSAGE_CONTROLLER_TOUCH_VALUE);
+                    this.events.ChangeTouchValue(param);
+                    break;
+
+                case ControllerMessage.CONTROLLER_TOUCH_TAP:
+                    this.EventLog.WriteEntry(ServiceMessages.MESSAGE_CONTROLLER_TOUCH_TAP);
+                    this.events.ChangeTouchTap(param);
+                    break;
+
+                case ControllerMessage.CONTROLLER_TOUCH_SCROLL:
+                    this.EventLog.WriteEntry(ServiceMessages.MESSAGE_CONTROLLER_TOUCH_SCROLL);
+                    this.events.ChangeTouchScroll(param);
+                    break;
+
+                case ControllerMessage.CONTROLLER_TOUCH_STARTUP:
+                    this.EventLog.WriteEntry(ServiceMessages.MESSAGE_CONTROLLER_TOUCH_STARTUP);
+                    this.events.ChangeTouchStartup(param);
+                    break;
+
+                case ControllerMessage.CONTROLLER_TOUCH_JITTER:
+                    this.EventLog.WriteEntry(ServiceMessages.MESSAGE_CONTROLLER_TOUCH_JITTER);
+                    this.events.ChangeTouchJitter(param);
+                    break;
+
+                case ControllerMessage.CONTROLLER_TOUCH_RIGHT:
+                    this.EventLog.WriteEntry(ServiceMessages.MESSAGE_CONTROLLER_TOUCH_RIGHT);
+                    this.events.ChangeTouchRight(param);
+                    break;
+
+                case ControllerMessage.CONTROLLER_RUMBLE_BOOST:
+                    this.EventLog.WriteEntry(ServiceMessages.MESSAGE_CONTROLLER_RUMBLE_BOOST);
+                    this.events.ChangeRumbleBoost(param);
+                    break;
+
+                case ControllerMessage.CONTROLLER_RUMBLE_HEAVY:
+                    this.EventLog.WriteEntry(ServiceMessages.MESSAGE_CONTROLLER_RUMBLE_HEAVY);
+                    this.events.ChangeRumbleHeavy(param);
+                    break;
+
+                case ControllerMessage.CONTROLLER_RUMBLE_LIGHT:
+                    this.EventLog.WriteEntry(ServiceMessages.MESSAGE_CONTROLLER_RUMBLE_LIGHT);
+                    this.events.ChangeRumbleLight(param);
+                    break;
+
+                case ControllerMessage.CONTROLLER_RUMBLE_SWAP:
+                    this.EventLog.WriteEntry(ServiceMessages.MESSAGE_CONTROLLER_RUMBLE_SWAP);
+                    this.events.ChangeRumbleSwap(param);
+                    break;
+
+                case ControllerMessage.CONTROLLER_TUNING_LEFT:
+                    this.EventLog.WriteEntry(ServiceMessages.MESSAGE_CONTROLLER_TUNING_TRIGGER);
+                    this.events.ChangeTuningLeft(param);
+                    break;
+
+                case ControllerMessage.CONTROLLER_TUNING_RIGHT:
+                    this.EventLog.WriteEntry(ServiceMessages.MESSAGE_CONTROLLER_TUNING_TRIGGER);
+                    this.events.ChangeTuningRight(param);
+                    break;
+
+                case ControllerMessage.CONTROLLER_TUNING_IDLE:
+                    this.EventLog.WriteEntry(ServiceMessages.MESSAGE_CONTROLLER_TUNING_IDLE);
+                    this.events.ChangeTuningIdle(param);
                     break;
 
                 case ControllerMessage.NONE:

@@ -1,4 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <configuration>
-	<showicon Default="false">false</showicon>
+	<light_red Default="0">0</light_red>
+	<light_green Default="0">0</light_green>
+	<light_blue Default="0">0</light_blue>
+	<light_flash Default="false">false</light_flash>
+	<light_battery Default="false">false</light_battery>
+	<light_discharge Default="false">true</light_discharge>
+	
+	<touch_value Default="10">50</touch_value>
+	<touch_tap Default="0">0</touch_tap>
+	<touch_scroll Default="0">0</touch_scroll>
+	<touch_startup Default="false">false</touch_startup>
+	<touch_jitter Default="false">false</touch_jitter>
+	<touch_right Default="false">false</touch_right>
+
+	<rumble_boost Default="0">0</rumble_boost>
+	<rumble_heavy Default="0">0</rumble_heavy>
+	<rumble_light Default="0">0</rumble_light>
+	<rumble_swap Default="false">false</rumble_swap>
+
+	<tuning_left Default="0">0</tuning_left>
+	<tuning_right Default="0">0</tuning_right>
+	<tuning_idle Default="0">0</tuning_idle>
+	<tuning_realtime Default="false">false</tuning_realtime>
+	<tuning_flush Default="false">false</tuning_flush>
+	<tuning_gyro Default="false">false</tuning_gyro>
+	<tuning_icon Default="false">false</tuning_icon>
 </configuration>

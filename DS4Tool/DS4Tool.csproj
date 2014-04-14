@@ -101,10 +101,22 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ApplicationManager.cs" />
-    <Compile Include="Utils\ControllerOptions.cs" />
-    <Compile Include="Views\ControllerViewMetro_Options_General.xaml.cs">
-      <DependentUpon>ControllerViewMetro_Options_General.xaml</DependentUpon>
+    <Compile Include="Views\ControllerViewMetro_Lightbar.xaml.cs">
+      <DependentUpon>ControllerViewMetro_Lightbar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ControllerViewMetro_Mapping.xaml.cs">
+      <DependentUpon>ControllerViewMetro_Mapping.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ControllerViewMetro_Rumble.xaml.cs">
+      <DependentUpon>ControllerViewMetro_Rumble.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ControllerViewMetro_Touchpad.xaml.cs">
+      <DependentUpon>ControllerViewMetro_Touchpad.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ControllerViewMetro_Tuning.xaml.cs">
+      <DependentUpon>ControllerViewMetro_Tuning.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\ControllerOptions.cs" />
     <Compile Include="ServiceCommand.cs" />
     <Compile Include="Utils\AppMessages.cs" />
     <Compile Include="Utils\ConfigOptions.cs" />
@@ -122,7 +134,23 @@
     </Compile>
     <Compile Include="ViewModels\ControllerViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
-    <Page Include="Views\ControllerViewMetro_Options_General.xaml">
+    <Page Include="Views\ControllerViewMetro_Lightbar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ControllerViewMetro_Mapping.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ControllerViewMetro_Rumble.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ControllerViewMetro_Touchpad.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ControllerViewMetro_Tuning.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

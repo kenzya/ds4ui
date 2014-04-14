@@ -33,7 +33,7 @@ namespace DS4Tool
 
         #endregion 
 
-        #region Controllers Tab
+        #region Controllers
 
         private ObservableCollection<ControllerViewModel> controllers;
         public ObservableCollection<ControllerViewModel> Controllers
@@ -62,13 +62,13 @@ namespace DS4Tool
             }
             else
             {
-                Controllers.Add(new ControllerViewModel(IconManager, ControllerConfigurationManager, controller));
+                Controllers.Add(new ControllerViewModel(IconManager, ControllerConfigurationManager, SubscribingService, controller));
             }
         }
 
-        #endregion // Controllers Tab
+        #endregion // Controllers
 
-        #region Log Tab
+        #region Log Flyout
 
         private CustomCollection<EventLogEntry> messageList;
         public CustomCollection<EventLogEntry> MessageList
@@ -88,9 +88,9 @@ namespace DS4Tool
             MessageList.Add(message);
         }
 
-        #endregion // Log Tab
+        #endregion // Log Flyout
 
-        #region Option Tab
+        #region Options Flyout
 
         private bool? metroStyle;
         public bool? MetroStyle
@@ -130,10 +130,28 @@ namespace DS4Tool
                     NotifyPropertyChanged(() => ExclusiveMode);
 
                     ConfigurationManager.SetData(ConfigOptions.OPTION_EXCLUSIVE, (value ?? false).ToString());
-                    if (value == true)
-                        SubscribingService.SendCommand(ControllerContract.Create(ControllerMessage.CONTROLLERS_EXCLUSIVE_ENABLED));
-                    else
-                        SubscribingService.SendCommand(ControllerContract.Create(ControllerMessage.CONTROLLERS_EXCLUSIVE_DISABLED));
+                    SubscribingService.SendCommand(ControllerContract.Create(value ?? false, ControllerMessage.CONTROLLERS_EXCLUSIVE_MODE));
+                }
+            }
+        }
+
+        private bool? minimized;
+        public bool? Minimized
+        {
+            get
+            {
+                if (minimized == null)
+                    return bool.Parse(ConfigurationManager.GetData(ConfigOptions.OPTION_MINIMIZED));
+                return minimized;
+            }
+            set
+            {
+                if (minimized != value)
+                {
+                    minimized = value;
+                    NotifyPropertyChanged(() => Minimized);
+
+                    ConfigurationManager.SetData(ConfigOptions.OPTION_MINIMIZED, (value ?? false).ToString());
                 }
             }
         }
@@ -264,7 +282,7 @@ namespace DS4Tool
             ExclusiveMode = bool.Parse(ConfigurationManager.GetDefault(ConfigOptions.OPTION_EXCLUSIVE));
         }
 
-        #endregion
+        #endregion // Options Flyout
 
         #region Ctor
 

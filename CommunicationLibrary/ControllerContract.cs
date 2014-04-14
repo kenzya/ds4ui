@@ -52,15 +52,32 @@ namespace CommunicationLibrary
         public bool IsIconVisible { get; set; }
 
         /// <summary>
+        /// Flagged when a single property is sent to the service
+        /// </summary>
+        [DataMember]
+        public object Value { get; set; }
+
+        /// <summary>
         /// Create a new Contract to be sent to the pipe
         /// </summary>
-        public static ControllerContract Create(ControllerMessage message)
+        public static ControllerContract Create(object value, ControllerMessage message)
         {
             return new ControllerContract
             {
+                Value = value,
                 Message = message
             };
         }
+        public static ControllerContract Create(string id, object value, ControllerMessage message)
+        {
+            return new ControllerContract
+            {
+                Id = id,
+                Value = value,
+                Message = message
+            };
+        }
+
         public static ControllerContract Create(string id, bool isUsbConnected, bool isBluetoothConnected, int batteryValue, ControllerMessage message)
         {
             return new ControllerContract

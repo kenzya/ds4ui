@@ -5,16 +5,36 @@
 	<line key="header_options">Options</line>
 
 	<line key="label_logs_empty">No Messages</line>
-
 	<line key="label_controllers_empty">No Controllers</line>
 	
-	<line key="header_options_general">General</line>
-	<line key="header_options_led">Led</line>
-	<line key="header_options_rumble">Rumble</line>
-	<line key="header_options_touchpad">Touchpad</line>
-	<line key="header_options_keymap">Remap</line>
+	<line key="label_option_controller_light_red">Red</line>
+	<line key="label_option_controller_light_green">Green</line>
+	<line key="label_option_controller_light_blue">Blue</line>
+	<line key="label_option_controller_light_full">Full</line>
+	<line key="label_option_controller_light_low">Low</line>
+	<line key="label_option_controller_light_flash">Flash On Low Battery</line>
+	<line key="label_option_controller_light_battery">Use Led As Battery Indicator</line>
+	<line key="label_option_controller_light_discharge">Use Alternate Color On Low Battery</line>
+	
+	<line key="label_option_controller_touch_value">Touch</line>
+	<line key="label_option_controller_touch_tap">Tap</line>
+	<line key="label_option_controller_touch_scroll">Scroll</line>
+	<line key="label_option_controller_touch_startup">Enable On Launch</line>
+	<line key="label_option_controller_touch_jitter">Jitter Compensation</line>
+	<line key="label_option_controller_touch_right">Lower Right Click</line>
 
-	<line key="label_option_controller_icon">Show Icon</line>
+	<line key="label_option_controller_rumble_boost">Boost</line>
+	<line key="label_option_controller_rumble_heavy">Heavy</line>
+	<line key="label_option_controller_rumble_light">Light</line>
+	<line key="label_option_controller_rumble_swap">Swap Rumble Input</line>
+
+	<line key="label_option_controller_tuning_left">Trigger Threshold Left</line>
+	<line key="label_option_controller_tuning_right">Trigger Threshold Right</line>
+	<line key="label_option_controller_tuning_idle">Idle Timeout</line>
+	<line key="label_option_controller_tuning_realtime">Realtime Changes</line>
+	<line key="label_option_controller_tuning_flush">Flush HID Queue After Reading</line>
+	<line key="label_option_controller_tuning_gyro">Sixaxis Gyro/Accel. Data</line>
+	<line key="label_option_controller_tuning_icon">Show Icon</line>
 
 	<line key="label_option_window_style">Metro Style (restart required)</line>
 	<line key="label_option_accent">Color</line>
@@ -22,6 +42,7 @@
 	<line key="label_option_languages">Languages</line>
 	<line key="label_option_button">Restore Default</line>
 	<line key="label_option_exclusive">Exclusive Mode</line>
+	<line key="label_option_minimized">Start Minimized</line>
 
 	<line key="Service started">Service started</line>
 	<line key="Service stopped">Service stopped</line>	
@@ -33,6 +54,26 @@
 	<line key="Change controller status request">Change controller status request</line>
 	<line key="Client connected to the service">Client connected to the service</line>
 	<line key="Client disconnected to the service">Client disconnected to the service</line>
-	<line key="Exclusive mode enabled">Exclusive mode enabled</line>
-	<line key="Exclusive mode disabled">Exclusive mode disabled</line>
+	<line key="Set exclusive mode">Set exclusive mode</line>
+	<line key="Led color changed">Led color changed</line>
+	<line key="Set Led to flash when low battery">Set Led to flash when low battery</line>
+	<line key="Set Led to be used as a battery indicator">Set Led to be used as a battery indicator</line>
+	<line key="Set touch sensitivity">Set touch sensitivity</line>
+	<line key="Set tap sensitivity">Set tap sensitivity</line>
+	<line key="Set scroll sensitivity">Set scroll sensitivity</line>
+	<line key="Set touchpad to be enabled at startup">Set touchpad to be enabled at startup</line>
+	<line key="Set touchpad jitter compensation">Set touchpad jitter compensation</line>
+	<line key="Set touchpad lower right click">Set touchpad lower right click</line>
+	<line key="Set rumble boosty">Set rumble boost</line>
+	<line key="Set heavy rumble boost">Set heavy rumble boost</line>
+	<line key="Set light rumble boost">Set light rumble boost</line>
+	<line key="Set swap of rumble inputs">Set swap of rumble inputs</line>
+	<line key="Set touch sensitivity">Set touch sensitivity</line>
+	<line key="Set tap sensitivity">Set tap sensitivity</line>
+	<line key="Set scroll sensitivity">Set scroll sensitivity</line>
+	<line key="Set trigger threshold">Set trigger threshold</line>
+	<line key="Set idle disconnection time">Set idle disconnection time</line>
+	<line key="Set realtime changes">Set realtime changes</line>
+	<line key="Set flush hid after each reading">Set flush hid after each reading</line>
+	<line key="Set gyro/acceleration data">Set gyro/acceleration data</line>
 </language>

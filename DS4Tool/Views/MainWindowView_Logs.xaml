@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:DS4Tool"
              xmlns:lang="clr-namespace:TranslationLibrary;assembly=TranslationLibrary">
     <Grid Margin="10,30" VerticalAlignment="Stretch">
-        <Grid Visibility="Hidden" Margin="10">
+        <Grid Visibility="Hidden" Margin="10,30,10,10">
             <Grid.ColumnDefinitions>                
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="*"/>

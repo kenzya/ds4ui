@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="DS4Tool.ControllerViewMetro_Lightbar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"                         
+             xmlns:lang="clr-namespace:TranslationLibrary;assembly=TranslationLibrary">
+    <Grid VerticalAlignment="Stretch" Margin="10,0,0,0" ShowGridLines="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="30"/>       
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="{lang:Translate label_option_controller_light_red}" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" TextWrapping="Wrap"/>
+        <Slider Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center" TickFrequency="25" Minimum="0" Maximum="255" Value="{Binding LightRed}" Style="{DynamicResource FlatSlider}"/>
+        <TextBlock Text="{Binding LightRed}" Grid.Row="0" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap"/>
+        <TextBlock Text="{Binding LightRed}" Grid.Row="0" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Right" TextWrapping="Wrap"/>
+
+        <TextBlock Text="{lang:Translate label_option_controller_light_green}" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" TextWrapping="Wrap"/>
+        <Slider Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center" TickFrequency="25" Minimum="0" Maximum="255" Value="{Binding LightGreen}" Style="{DynamicResource FlatSlider}"/>
+        <TextBlock Text="{Binding LightGreen}" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap"/>
+        <TextBlock Text="{Binding LightGreen}" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Right" TextWrapping="Wrap"/>
+
+        <TextBlock Text="{lang:Translate label_option_controller_light_blue}" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" TextWrapping="Wrap"/>
+        <Slider Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center" TickFrequency="25" Minimum="0" Maximum="255" Value="{Binding LightBlue}" Style="{DynamicResource FlatSlider}"/>
+        <TextBlock Text="{Binding LightBlue}" Grid.Row="2" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap"/>
+        <TextBlock Text="{Binding LightBlue}" Grid.Row="2" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Right" TextWrapping="Wrap"/>
+
+        <TextBlock Text="{lang:Translate label_option_controller_light_flash}" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" TextWrapping="Wrap"/>
+        <CheckBox Grid.Row="3" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding LightFlash}"/>
+
+        <TextBlock Text="{lang:Translate label_option_controller_light_battery}" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" TextWrapping="Wrap"/>
+        <CheckBox Grid.Row="4" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding LightBattery}"/>
+
+        <TextBlock Text="{lang:Translate label_option_controller_light_discharge}" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" TextWrapping="Wrap"/>
+        <CheckBox Grid.Row="5" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding LightDischarge}" IsEnabled="False"/>
+    </Grid>
+</UserControl>
